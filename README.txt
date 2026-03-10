@@ -1,2 +1,2 @@
-Giorgos Hadjicostandis
+Giorgos Hadjicostantis
 Giorgos Zambas
