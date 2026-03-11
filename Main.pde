@@ -6,14 +6,14 @@
 
 // draw guy walking and looking at secondary screen
 
-PFont zigBlack;
-csvReader cr;
+PFont text;
+csvReader cr = new csvReader();
 ArrayList<Flight> flights;
 //Table table;
 
 void setup() {
   size(600, 400);
-  zigBlack = createFont("Ziggurat-Black", 24);
+  text = loadFont("AlTarikh-24.vlw");
   
  // 1. Load the excel/csv file (ensure "flights.csv" is in your data folder)
 //Table table = loadTable(filename, "header");
@@ -24,7 +24,7 @@ void setup() {
 
   void draw(){
   background(0);
-  textFont(zigBlack);
+  textFont(text);
   textSize(10);
   fill(255);
   line(50, 0, 50, height);

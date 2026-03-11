@@ -58,7 +58,7 @@ class Flight {
   
   String getData() {
     String data = "";
-    data += flightDate + ", " + origin + ", " + destination + ", " + arrivalTime;
+    data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year + ", " + origin + ", " + destination + ", " + arrivalTime;
     return data;
   }
   
