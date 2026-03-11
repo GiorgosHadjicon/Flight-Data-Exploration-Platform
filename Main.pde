@@ -10,6 +10,7 @@ PFont text;
 PFont myFont;
 WidgetList widgetList;
 boolean showFlights = false;
+boolean printedOnce = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
 //Table table;
@@ -22,24 +23,20 @@ void setup() {
   widgetList = new WidgetList();
   widgetList.add(new Widget(250, 150, 120, 45, "PRINT",   color(255, 0, 0)));
   
- // 1. Load the excel/csv file (ensure "flights.csv" is in your data folder)
-//Table table = loadTable(filename, "header");
-
-
+  flights = cr.readCSV("flights2k.csv");
+  
 }
 
   void draw(){
   background(0);
   widgetList.display();
-  textFont(text);
-  textSize(10);
   fill(255);
   line(50, 0, 50, height);
-  textAlign(LEFT);
   
   if (showFlights) {
-    
-  flights = cr.readCSV("flights2k.csv");
+    textFont(text);
+    textSize(10);
+    textAlign(LEFT);
   
   //For loop to print 5 sets of data using the string getData() 
   // We limit the loop to 5 items
@@ -50,8 +47,6 @@ void setup() {
     float yPos = 40 + (i * 30); // Spacing each line 30 pixels apart
     text(displayString, 60, yPos);
     
-    // This sends the text to the Terminal
-    System.out.println(displayString);
   }
  }
 }
@@ -62,6 +57,14 @@ void mousePressed() {
   // If a widget was clicked, print
   if (clicked != null) {
     showFlights = true;
+    
+    // This sends the text to the Terminal
+    if (!printedOnce) {
+      for (int i = 0; i < 5 && i < flights.size(); i++) {
+        System.out.println(flights.get(i).getData());
+      }
+      printedOnce = true;
+    }
   }
 }
 
