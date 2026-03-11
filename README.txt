@@ -2,7 +2,7 @@ Giorgos Hadjicostantis
 Giorgos Zambas
 Odysseas Leonidou
 Zuhairia Sahjabin
-Teresa Dominogos
+Teresa Domingos
 
 Todo List:
 -Have different tabs/screens Iex graphs, map, search, flight selection)
