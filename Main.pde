@@ -21,7 +21,7 @@ void setup() {
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
   widgetList = new WidgetList();
-  widgetList.add(new Widget(250, 150, 120, 45, "PRINT",   color(255, 0, 0)));
+  widgetList.add(new Widget(250, 150, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0)));
   
   flights = cr.readCSV("flights2k.csv");
   
@@ -31,7 +31,7 @@ void setup() {
   background(0);
   widgetList.display();
   fill(255);
-  line(50, 0, 50, height);
+
   
   if (showFlights) {
     textFont(text);
@@ -57,6 +57,7 @@ void mousePressed() {
   // If a widget was clicked, print
   if (clicked != null) {
     showFlights = true;
+    clicked.pressed = true;
     
     // This sends the text to the Terminal
     if (!printedOnce) {
@@ -66,6 +67,9 @@ void mousePressed() {
       printedOnce = true;
     }
   }
+}
+void mouseReleased() {
+  widgetList.releaseAll();  // <-- THIS WAS MISSING - resets pressed state
 }
 
 class WidgetList {
@@ -93,31 +97,79 @@ class WidgetList {
     }
     return null;
   }
+  
+  void releaseAll() {
+  for (Widget w : widgets) 
+    {
+      w.pressed = false;
+    }
+  }
 }
 
 class Widget {
     int x, y, w, h;
     String label;
     color buttonColor;
-    
-    Widget(int x, int y, int w, int h, String label, color buttonColor) {
+    color hoverColor;
+    color pressedColor;
+    boolean pressed = false;
+    Widget(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor) {
       this.x = x;
       this.y = y;
       this.w = w;
       this.h = h;
       this.label = label;
       this.buttonColor = buttonColor;
+      this.hoverColor = hoverColor;
+      this.pressedColor = pressedColor;
     }
     
     void display() {
-      stroke(0);
-      fill(buttonColor);
-      rect(x, y, w, h, 8);
+      color currentColor;
+      int offsetX = 0;
+      int offsetY = 0;  // for indent effect
+      color strokeColor;
+      int strokeWeightValue;
       
+      if (pressed)
+      {
+        currentColor = pressedColor;
+        offsetX = 2;
+        offsetY = 2;
+        strokeWeightValue = 3;
+        strokeColor = color(255, 255, 0); // Yellow stroke when pressed
+      }
+      else if (contains(mouseX, mouseY))
+      {
+        currentColor = hoverColor;
+        stroke(10);
+        offsetX=0;
+        offsetY=0;
+        strokeWeightValue = 3;
+        strokeColor = color(255, 255, 255); // Yellow stroke when pressed
+      }
+      else
+      {
+        currentColor = buttonColor;
+        stroke(0);
+        offsetX=0;
+        offsetY=0;
+        strokeWeightValue = 1;
+        strokeColor = color(0); // Yellow stroke when pressed
+      }
+      
+      stroke(strokeColor);
+      strokeWeight(strokeWeightValue);
+      fill(currentColor);
+      rect(x+offsetX, y+offsetY, w, h, 8);
+      
+        
+      
+
       fill(0);
       textAlign(CENTER, CENTER);
       textFont(myFont);
-      text(label, x + w/2, y + h/2);
+      text(label, x + w/2 + offsetX, y + h/2 + offsetY);
     }
     
     boolean contains(int mx, int my) {
