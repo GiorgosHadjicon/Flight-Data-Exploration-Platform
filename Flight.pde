@@ -56,15 +56,70 @@ class Flight {
         this.distance = distance;
   }
   
-  String getData() {
+  String getDate() {
     String data = "";
-    data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year + ", " + originCityName + ", " + destination + ", " + arrivalTime;
+    data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year;
     return data;
   }
 
-    String getAllData() {
+  String getOriginCityName() {
     String data = "";
-    data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year + ", " + originCityName + ", " + destination + ", " + arrivalTime;
+    data += originCityName;
+    return data;
+  }
+  
+  String getDestinationCityName() {
+    String data = "";
+    data += destinationCityName;
+    return data;
+  }
+  
+  String getDepartureTime() {
+    String data = "";
+    if (this.departureTime >= 1000) {
+      data += departureTime;
+    }
+    
+    else  if (this.departureTime >= 100){
+      data += "0" + departureTime;
+    }
+    
+    else  if (this.departureTime >= 10){
+      data += "00" + departureTime;
+    }
+    
+    else  if (this.departureTime >= 1){
+      data += "000" + departureTime;
+    }
+    
+    else {
+      data = "0000";
+    }
+    
+    return data;
+  }
+  
+    String getArrivalTime() {
+    String data = "";
+    if (this.arrivalTime >= 1000) {
+      data += arrivalTime;
+    }
+    
+    else  if (this.arrivalTime >= 100){
+      data += "0" + arrivalTime;
+    }
+    
+    else  if (this.arrivalTime >= 10){
+      data += "00" + arrivalTime;
+    }
+    
+    else  if (this.arrivalTime >= 1){
+      data += "000" + arrivalTime;
+    }
+    
+    else {
+      data = "0000";
+    }
     return data;
   }
   

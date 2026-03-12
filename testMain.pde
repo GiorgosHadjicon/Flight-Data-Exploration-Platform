@@ -22,30 +22,29 @@ void setup() {
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
   widgetList = new WidgetList();
-  widgetList.add(new Widget(250, 150, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0)));
-  
+  widgetList.add(new Button(250, 150, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0)));
   flights = cr.readCSV("flights2k.csv");
   result = new Search_Results(flights);
 }
 
   void draw(){
   background(0);
-  widgetList.display();
   fill(255);
+  widgetList.display();
 
   
   if (showFlights) {
     textFont(text);
     textSize(10);
     textAlign(LEFT);
-  
+
   result.drawDepartureFromDate(1);
-    
+
   }
  }
 
 void mousePressed() {
-  Widget clicked = widgetList.getEvent(mouseX, mouseY);
+  Button clicked = widgetList.getEvent(mouseX, mouseY);
 
   // If a widget was clicked, print
   if (clicked != null) {
@@ -55,7 +54,7 @@ void mousePressed() {
     // This sends the text to the Terminal
     if (!printedOnce) {
       for (int i = 0; i < 5 && i < flights.size(); i++) {
-        System.out.println(flights.get(i).getData());
+        //System.out.println(flights.get(i).getData());
       }
       printedOnce = true;
     }
@@ -66,24 +65,24 @@ void mouseReleased() {
 }
 
 class WidgetList {
-  ArrayList<Widget> widgets;
+  ArrayList<Button> widgets;
 
   WidgetList() {
-    widgets = new ArrayList<Widget>();
+    widgets = new ArrayList<Button>();
   }
 
-  void add(Widget w) {
+  void add(Button w) {
     widgets.add(w);
   }
 
   void display() {
-    for (Widget w : widgets) {
+    for (Button w : widgets) {
       w.display();
     }
   }
 
-  Widget getEvent(int mx, int my) {
-    for (Widget w : widgets) {
+  Button getEvent(int mx, int my) {
+    for (Button w : widgets) {
       if (w.contains(mx, my)) {
         return w;
       }
@@ -92,81 +91,14 @@ class WidgetList {
   }
   
   void releaseAll() {
-  for (Widget w : widgets) 
+  for (Button w : widgets) 
     {
       w.pressed = false;
     }
   }
-}
-
-class Widget {
-    int x, y, w, h;
-    String label;
-    color buttonColor;
-    color hoverColor;
-    color pressedColor;
-    boolean pressed = false;
-    Widget(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor) {
-      this.x = x;
-      this.y = y;
-      this.w = w;
-      this.h = h;
-      this.label = label;
-      this.buttonColor = buttonColor;
-      this.hoverColor = hoverColor;
-      this.pressedColor = pressedColor;
-    }
-    
-    void display() {
-      color currentColor;
-      int offsetX = 0;
-      int offsetY = 0;  // for indent effect
-      color strokeColor;
-      int strokeWeightValue;
-      
-      if (pressed)
-      {
-        currentColor = pressedColor;
-        offsetX = 2;
-        offsetY = 2;
-        strokeWeightValue = 3;
-        strokeColor = color(255, 255, 0); // Yellow stroke when pressed
-      }
-      else if (contains(mouseX, mouseY))
-      {
-        currentColor = hoverColor;
-        stroke(10);
-        offsetX=0;
-        offsetY=0;
-        strokeWeightValue = 3;
-        strokeColor = color(255, 255, 255); // Yellow stroke when pressed
-      }
-      else
-      {
-        currentColor = buttonColor;
-        stroke(0);
-        offsetX=0;
-        offsetY=0;
-        strokeWeightValue = 1;
-        strokeColor = color(0); // Yellow stroke when pressed
-      }
-      
-      stroke(strokeColor);
-      strokeWeight(strokeWeightValue);
-      fill(currentColor);
-      rect(x+offsetX, y+offsetY, w, h, 8);
-      
-        
-      
-
-      fill(0);
-      textAlign(CENTER, CENTER);
-      textFont(myFont);
-      text(label, x + w/2 + offsetX, y + h/2 + offsetY);
-    }
-    
-    boolean contains(int mx, int my) {
-      return (mx >= x && mx <= x + w && my >= y && my <= y + h);
-    }
+  
+  int size() {
+    return widgets.size();
   }
- 
+  
+}
