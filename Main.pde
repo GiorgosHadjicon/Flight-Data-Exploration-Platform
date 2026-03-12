@@ -2,9 +2,13 @@
 //==== Main Screen ====
 //=====================
 
-//(keep variable declarations in setting up)
+// TODO here: draw guy walking and looking at secondary screen
 
-// draw guy walking and looking at secondary screen
+// Declarations:
+
+// For Sreach
+Boolean typing = false;
+String currentSearchString = "";
 
 PFont text;
 PFont myFont;
@@ -16,7 +20,7 @@ ArrayList<Flight> flights;
 //Table table;
 
 void setup() {
-  size(600, 400);
+  size(1500, 850);
   text = loadFont("AlTarikh-24.vlw");
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
@@ -51,26 +55,7 @@ void setup() {
  }
 }
 
-void mousePressed() {
-  Widget clicked = widgetList.getEvent(mouseX, mouseY);
 
-  // If a widget was clicked, print
-  if (clicked != null) {
-    showFlights = true;
-    clicked.pressed = true;
-    
-    // This sends the text to the Terminal
-    if (!printedOnce) {
-      for (int i = 0; i < 5 && i < flights.size(); i++) {
-        System.out.println(flights.get(i).getData());
-      }
-      printedOnce = true;
-    }
-  }
-}
-void mouseReleased() {
-  widgetList.releaseAll();  // <-- THIS WAS MISSING - resets pressed state
-}
 
 class WidgetList {
   ArrayList<Widget> widgets;
