@@ -36,7 +36,7 @@ class Search_Results {
     flightWidgetList.display();
     int yIncrement = 0;
     
-    //TODO: Add title and make them into buttons
+    // Creates buttons for choosing date, origin, destination, departure time, and arrival time
     if (!buttonsCreated) {
       textSize(13);
       flightWidgetList.add( new Button(532, 250, 70, 40, "Date", color(180), color(120), color(0, 255, 0)) );
