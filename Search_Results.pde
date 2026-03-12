@@ -22,7 +22,7 @@ class Search_Results {
   }
   
   
-  void drawDepartureFromDate(int userDateDeparture) {
+  void drawDepartureFromDate(int userDateDeparture, int pageNum) {
      
     stroke(0);
     strokeWeight(5);
@@ -37,8 +37,16 @@ class Search_Results {
     int yIncrement = 0;
     
     //TODO: Add title and make them into buttons
+    if (!buttonsCreated) {
+      textSize(13);
+      flightWidgetList.add( new Button(532, 250, 70, 40, "Date", color(180), color(120), color(0, 255, 0)) );
+      flightWidgetList.add( new Button(625, 250, 80, 40, "Origin", color(180), color(120), color(0, 255, 0)) );
+      flightWidgetList.add( new Button(730, 250, 125, 40, "Destination", color(180), color(120), color(0, 255, 0)) );
+      flightWidgetList.add( new Button(865, 250, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0)) );
+      flightWidgetList.add( new Button(920, 250, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0)) );
+    }
     
-    for (int i = 0; i < flightsFiltered.size(); i++) {
+    for (int i = (pageNum - 1) * 10; i < flightsFiltered.size(); i++) {
       Flight currentFlight = flights.get(i);
       if (currentFlight.flightDate.day == userDateDeparture && yIncrement <= 9) {
         yIncrement++;

@@ -38,7 +38,7 @@ void setup() {
     textSize(10);
     textAlign(LEFT);
 
-  result.drawDepartureFromDate(1);
+  result.drawDepartureFromDate(1, 1);
 
   }
  }
