@@ -9,6 +9,8 @@
 // For Sreach
 Boolean typing = false;
 String currentSearchString = "";
+Searcher search;
+ArrayList<Flight> testFlights;
 
 PFont text;
 PFont myFont;
@@ -29,12 +31,19 @@ void setup() {
   
   flights = cr.readCSV("flights2k.csv");
   
+  /* Test
+  search = new Searcher(flights); //<>//
+  testFlights = search.SearchTest("DCA"); //<>//
+  for (Flight i : testFlights) {
+    System.out.println(i.origin);
+  } */
 }
 
   void draw(){
   background(0);
   widgetList.display();
   fill(255);
+
 
   
   if (showFlights) {
