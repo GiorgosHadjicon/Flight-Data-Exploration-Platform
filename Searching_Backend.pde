@@ -7,7 +7,7 @@
 
 class Searcher {
    // ArrayList Declarations
-   ArrayList<Flight> SearchedFLights = new ArrayList<>();;
+   ArrayList<Flight> SearchedFLights = new ArrayList<>();
    ArrayList<Flight> tempArray = new ArrayList<>();
    
    // Hashmaps Declarations
@@ -34,6 +34,7 @@ class Searcher {
    boolean cancelled;
    boolean diverted;
    float distance;
+   
    
    Searcher(ArrayList<Flight> allFlights){
      // Constructor Parameteres:
@@ -64,11 +65,27 @@ class Searcher {
      }
    }
    
-   /*ArrayList<Flight> Search(String flightDate, String mktCarrier, int mktCarrierFlightNum, String origin, String originCityName, String originStateAbbreviation, 
+   ArrayList<Flight> Search(String flightDate, String mktCarrier, int mktCarrierFlightNum, String origin, String originCityName, String originStateAbbreviation, 
                             int originWac, String destination, String destinationCityName, String destinationStateAbbreviation, int destinationWac, 
                             int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, float cancelled, float diverted, float distance){
+     // Default parameters fir strings is "" and for int is -1
+     // Function comments go here
      
-   }*/
+     /* Firstly remove duplicates:
+          arrayList1.removeAll(arrayList2);
+        Then merge two arrayList:
+          arrayList1.addAll(arrayList2); */
+          
+     // Search lists
+     ArrayList<Flight> originList = new ArrayList<>();
+     ArrayList<Flight> originListCityNames = new ArrayList<>();
+     // the rest go here...
+     
+     if (!origin.equals("")){
+         
+     }
+          
+   }
    
    /*ArrayList<Flight> SearchTest(String originTest){
      for (String currentKey : flightOrigins.keySet()) {
