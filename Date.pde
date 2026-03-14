@@ -14,4 +14,8 @@ class Date {
     year = Integer.valueOf(arrOfStr[2]);
   }
   
+  String getDateString() {
+     return (day + "/" + month + "/" + year);
+  }
+  
 }
