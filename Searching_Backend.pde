@@ -98,13 +98,10 @@ class Searcher {
    ArrayList<Flight> Search(String flightDateString, String mktCarrier, int mktCarrierFlightNum, String origin, String originCityName, String originStateAbbreviation, 
                             int originWac, String destination, String destinationCityName, String destinationStateAbbreviation, int destinationWac, 
                             int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, boolean cancelled, boolean diverted, float distance){
-     // Default parameters fir strings is "", for int/float is -1 and for booleans is false
-     // Function comments go here
-     
-     /* Firstly remove duplicates:
-          arrayList1.removeAll(arrayList2);
-        Then merge two arrayList:
-          arrayList1.addAll(arrayList2); */
+     // Default parameters for strings is "", for int/float is -1 and for booleans is false
+     // The Search function accepts any flight atribute as a search parameter and only filters using any paramterer passed that is not the default parameter
+     // Returns ArrayList<Flight>
+     // Will return a list of all the flight objects resulting from the search
           
      // List of all the resulting ArrayLists from eatch search parameter
      ArrayList<ArrayList<Flight>> allLists = new ArrayList<ArrayList<Flight>>();
