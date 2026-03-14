@@ -11,8 +11,11 @@ class Searcher {
    ArrayList<Flight> tempArray = new ArrayList<>();
    
    // Hashmaps Declarations
+   HashMap<String, ArrayList<Flight>> flightDateStrings = new HashMap<>();
    HashMap<String, ArrayList<Flight>> flightOrigins = new HashMap<>();
    HashMap<String, ArrayList<Flight>> flightOriginCityNames = new HashMap<>();
+   HashMap<String, ArrayList<Flight>> flightDestination = new HashMap<>();
+   HashMap<String, ArrayList<Flight>> flightDestinationCityName = new HashMap<>();
    // the rest of the hashmaps go here...
    
    // Search parameters
@@ -61,14 +64,41 @@ class Searcher {
         }
         // Updating the array list in the value of the dictionary
         flightOriginCityNames.get(curentOriginCityName).add(currentFlight);
+        
+        // Hashing all destinations
+        String curentDestination = currentFlight.destination; 
+        // For new entries in the dictionary
+        if (!flightDestination.containsKey(curentDestination)) {
+          flightDestination.put(curentDestination, new ArrayList<Flight>());
+        }
+        // Updating the array list in the value of the dictionary
+        flightDestination.get(curentDestination).add(currentFlight);
+        
+        // Hashing all destination city names
+        String curentDestinationCityName = currentFlight.destinationCityName; 
+        // For new entries in the dictionary
+        if (!flightDestinationCityName.containsKey(curentDestinationCityName)) {
+          flightDestinationCityName.put(curentDestinationCityName, new ArrayList<Flight>());
+        }
+        // Updating the array list in the value of the dictionary
+        flightDestinationCityName.get(curentDestinationCityName).add(currentFlight);
+        
+        // Hashing all flight dates
+        String curentFlightDate = currentFlight.flightDateString; 
+        // For new entries in the dictionary
+        if (!flightDateStrings.containsKey(curentFlightDate)) {
+          flightDateStrings.put(curentFlightDate, new ArrayList<Flight>());
+        }
+        // Updating the array list in the value of the dictionary
+        flightDateStrings.get(curentFlightDate).add(currentFlight);
        
      }
    }
    
-   ArrayList<Flight> Search(String flightDate, String mktCarrier, int mktCarrierFlightNum, String origin, String originCityName, String originStateAbbreviation, 
+   ArrayList<Flight> Search(String flightDateString, String mktCarrier, int mktCarrierFlightNum, String origin, String originCityName, String originStateAbbreviation, 
                             int originWac, String destination, String destinationCityName, String destinationStateAbbreviation, int destinationWac, 
-                            int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, float cancelled, float diverted, float distance){
-     // Default parameters fir strings is "" and for int is -1
+                            int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, boolean cancelled, boolean diverted, float distance){
+     // Default parameters fir strings is "", for int/float is -1 and for booleans is false
      // Function comments go here
      
      /* Firstly remove duplicates:
@@ -76,28 +106,69 @@ class Searcher {
         Then merge two arrayList:
           arrayList1.addAll(arrayList2); */
           
-     // Search lists
-     ArrayList<Flight> originList = new ArrayList<>();
-     ArrayList<Flight> originListCityNames = new ArrayList<>();
-     // the rest go here...
+     // List of all the resulting ArrayLists from eatch search parameter
+     ArrayList<ArrayList<Flight>> allLists = new ArrayList<ArrayList<Flight>>();
+     // Will use a hash set to combine lists instantly
+     HashSet<Flight> result;
      
+     // If search parameter includes origin we assign originList the cirrect Array List for the hashmap
      if (!origin.equals("")){
-         
+       for (String currentKey : flightOrigins.keySet()) {
+         //key: currentKey, value: flightOrigins.get(currentKey)
+         if (currentKey.equals(origin)){
+           allLists.add(flightOrigins.get(currentKey));
+           break;
+         }
+       }
      }
-          
+     // Same search for originCityName 
+     if (!originCityName.equals("")){
+       for (String currentKey : flightOriginCityNames.keySet()) {
+         //key: currentKey, value: "correctHashmap".get(currentKey)
+         if (currentKey.equals(originCityName)){
+           allLists.add(flightOriginCityNames.get(currentKey));
+           break;
+         }
+       }
+     }
+     // Same search for date 
+     if (!flightDateString.equals("")){
+       for (String currentKey : flightDateStrings.keySet()) {
+         if (currentKey.equals(flightDateString)){
+           allLists.add(flightDateStrings.get(currentKey));
+           break;
+         }
+       }
+     }
+     // Same search for destination 
+     if (!destination.equals("")){
+       for (String currentKey : flightDestination.keySet()) {
+         if (currentKey.equals(destination)){
+           allLists.add(flightDestination.get(currentKey));
+           break;
+         }
+       }
+     }
+     // Same search for destination city names
+     if (!destinationCityName.equals("")){
+       for (String currentKey : flightDestinationCityName.keySet()) {
+         if (currentKey.equals(destinationCityName)){
+           allLists.add(flightDestinationCityName.get(currentKey));
+           break;
+         }
+       }
+     }
+     
+     // Combine all resulting ArrayLists into the final filtering with all used parameters
+     // Starting with the first list
+     result = new HashSet<Flight>(allLists.get(0));
+     
+     // intersect with the rest
+     for (int i = 1; i < allLists.size(); i++) result.retainAll(allLists.get(i));
+     
+     // Coverting the hash set into a list of flights to resturn
+     ArrayList<Flight> commonFlights = new ArrayList<Flight>(result);
+     return commonFlights;   
    }
-   
-   /*ArrayList<Flight> SearchTest(String originTest){
-     for (String currentKey : flightOrigins.keySet()) {
-        //key: currentKey, value: flightOrigins.get(currentKey)
-        if (currentKey.equals(originTest)){
-            System.out.println("key: " + currentKey + " value: " + flightOrigins.get(currentKey));
-          
-            return flightOrigins.get(currentKey);
-        }
-     }
-     tempArray.clear();
-     return tempArray;
-   } */
    
 }

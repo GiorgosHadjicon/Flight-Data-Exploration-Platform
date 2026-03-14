@@ -5,6 +5,8 @@
 // TODO here: draw guy walking and looking at secondary screen
 
 // Declarations:
+import java.util.Set;
+import java.util.HashSet;
 
 // For Sreach
 Boolean typing = false;
@@ -31,12 +33,17 @@ void setup() {
   
   flights = cr.readCSV("flights2k.csv");
   
-  /* Test
+  // Search Test
   search = new Searcher(flights); //<>//
-  testFlights = search.SearchTest("DCA"); //<>//
+  testFlights = search.Search("1/1/2022", "", -1, "JFK", "New York, NY", "", -1, "LAX", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
   for (Flight i : testFlights) {
-    System.out.println(i.origin);
-  } */
+    System.out.print(i.flightDateString + " ");
+    System.out.print(i.origin + " ");
+    System.out.print(i.originCityName + " ");
+    System.out.print(i.arrivalTime + " ");
+    System.out.println(i.destination);
+  } 
+  // Search test end
 }
 
   void draw(){

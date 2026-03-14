@@ -1,6 +1,7 @@
 class Flight {
 
   Date flightDate;
+  String flightDateString;
   String mktCarrier;
   int mktCarrierFlightNum;
   String origin;
@@ -24,6 +25,7 @@ class Flight {
         int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, float cancelled, float diverted, float distance) {
     
         this.flightDate = new Date(flightDate);
+        flightDateString = this.flightDate.getDateString();
         this.mktCarrier = mktCarrier; 
         this.mktCarrierFlightNum = mktCarrierFlightNum;
         this.origin = origin; 
