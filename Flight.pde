@@ -1,5 +1,4 @@
 class Flight {
-
   Date flightDate;
   String mktCarrier;
   int mktCarrierFlightNum;

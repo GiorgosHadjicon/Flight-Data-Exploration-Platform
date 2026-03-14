@@ -10,7 +10,8 @@
 
 
 
-class Button implements Widget {
+class Button implements Widget 
+{
     int x, y, w, h;
     String label;
     color buttonColor;
@@ -50,7 +51,7 @@ class Button implements Widget {
         offsetX=0;
         offsetY=0;
         strokeWeightValue = 3;
-        strokeColor = color(255, 255, 255); // Yellow stroke when pressed
+        strokeColor = color(255, 255, 255); // white stroke when pressed
       }
       else
       {
@@ -59,7 +60,7 @@ class Button implements Widget {
         offsetX=0;
         offsetY=0;
         strokeWeightValue = 1;
-        strokeColor = color(0); // Yellow stroke when pressed
+        strokeColor = color(0); 
       }
       
       stroke(strokeColor);
