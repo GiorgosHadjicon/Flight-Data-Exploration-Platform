@@ -22,7 +22,7 @@ class Search_Results {
   }
   
   
-  void drawDepartureFromDate(int userDateDeparture, int pageNum) {
+  void drawDeparture(int pageNum) {
      
     stroke(0);
     strokeWeight(5);
@@ -39,22 +39,22 @@ class Search_Results {
     // Creates buttons for choosing date, origin, destination, departure time, and arrival time
     if (!buttonsCreated) {
       textSize(13);
-      flightWidgetList.add( new Button(532, 250, 70, 40, "Date", color(180), color(120), color(0, 255, 0)) );
-      flightWidgetList.add( new Button(625, 250, 80, 40, "Origin", color(180), color(120), color(0, 255, 0)) );
-      flightWidgetList.add( new Button(730, 250, 125, 40, "Destination", color(180), color(120), color(0, 255, 0)) );
-      flightWidgetList.add( new Button(865, 250, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0)) );
-      flightWidgetList.add( new Button(920, 250, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0)) );
+      flightWidgetList.add( new Button(532, 250, 70, 40, "Date", color(180), color(120), color(0, 255, 0) , 2) );
+      flightWidgetList.add( new Button(625, 250, 80, 40, "Origin", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(730, 250, 125, 40, "Destination", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(865, 250, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(920, 250, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0), 2) );
     }
     
     for (int i = (pageNum - 1) * 10; i < flightsFiltered.size(); i++) {
-      Flight currentFlight = flights.get(i);
-      if (currentFlight.flightDate.day == userDateDeparture && yIncrement <= 9) {
+      Flight currentFlight = flightsFiltered.get(i);
+      if (yIncrement <= 9) {
         yIncrement++;
         int yPos = 300 + (yIncrement * 25); // Spacing each line 40 pixels apart
         fill(0);
         textSize(13);
         if (!buttonsCreated) {
-          flightWidgetList.add( new Button(530, yPos - 10, 440, 20, "", color(180), color(200), color(0, 255, 0)) );
+          flightWidgetList.add( new Button(530, yPos - 10, 440, 20, "", color(180), color(200), color(0, 255, 0), 3) );
         }
         text(currentFlight.getDate(), 565, yPos);
         text(currentFlight.getOriginCityName(), 665, yPos);

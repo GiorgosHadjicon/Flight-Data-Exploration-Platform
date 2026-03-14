@@ -17,7 +17,9 @@ class Button implements Widget {
     color hoverColor;
     color pressedColor;
     boolean pressed = false;
-    Button(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor) {
+    int event;
+    
+    Button(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor, int event) {
       this.x = x;
       this.y = y;
       this.w = w;
@@ -26,6 +28,7 @@ class Button implements Widget {
       this.buttonColor = buttonColor;
       this.hoverColor = hoverColor;
       this.pressedColor = pressedColor;
+      this.event = event;
     }
     
     void display() {
@@ -81,4 +84,7 @@ class Button implements Widget {
       return (mx >= x && mx <= x + w && my >= y && my <= y + h);
     }
     
+    int getEvent() {
+      return event;
+    }
   }
