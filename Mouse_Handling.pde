@@ -9,9 +9,9 @@ final int EVENT_BTN1 = 3;
 final int EVENT_BTN2 = 4;
 
 void mousePressed() {
+  widgetList.handleSearchEvents();  
   Button clicked = widgetList.getEvent(mouseX, mouseY);
-
-
+  
   // If a widget was clicked, print
   if (clicked != null) {
 
@@ -33,6 +33,6 @@ void mousePressed() {
   }
 }
 void mouseReleased() {
-  widgetList.releaseAll();  // <-- THIS WAS MISSING - resets pressed state
+  widgetList.releaseAll();  
 }
 // mouse hover ect...

@@ -21,6 +21,8 @@ boolean showFlights = false;
 boolean printedOnce = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
+ArrayList<String> temp = new ArrayList<String>();
+public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
 Search_Results result;
 //Table table;
 
@@ -31,7 +33,15 @@ void setup() {
   textFont(myFont);
   widgetList = new WidgetList();
   widgetList.add(new Button(250, 150, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 1));
+  widgetList.addDrop(new dropDownSearch(100, 50, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
   flights = cr.readCSV("flights2k.csv");
+  for (int i = 0; i < flights.size(); i++)
+  {
+    Flight currentFlight = flights.get(i);
+    String displayString = currentFlight.getDate(); // Uses data from string
+    temp.add(displayString);
+  }
+  
 //  // Search Test
   search = new Searcher(flights); //<>//
   testFlights = search.Search("1/1/2022", "", -1, "JFK", "New York, NY", "", -1, "LAX", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
@@ -48,16 +58,15 @@ void setup() {
 
   void draw(){
   background(0);
-  widgetList.display();
+  widgetList.displayWidgets();
   fill(255);
-
-  
   if (showFlights) {
     textFont(text);
     textSize(10);
     textAlign(LEFT);
     
     result.drawDeparture(1);
+    
 
  }
 }

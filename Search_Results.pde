@@ -23,7 +23,7 @@ class Search_Results {
   
   
   void drawDeparture(int pageNum) {
-     
+    
     stroke(0);
     strokeWeight(5);
     fill(180);
@@ -33,7 +33,7 @@ class Search_Results {
     strokeWeight(5);
     fill(0, 100, 255);
     rect(525, 225, 450, 350, 5);
-    flightWidgetList.display();
+    flightWidgetList.displayWidgets();
     int yIncrement = 0;
     
     // Creates buttons for choosing date, origin, destination, departure time, and arrival time
@@ -64,6 +64,7 @@ class Search_Results {
       }        
     }
     buttonsCreated = true;
+    
   }
  
 }

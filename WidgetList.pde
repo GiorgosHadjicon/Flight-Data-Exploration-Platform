@@ -1,5 +1,8 @@
+
+
 class WidgetList {
   ArrayList<Button> widgets;
+
 
   WidgetList() {
     widgets = new ArrayList<Button>();
@@ -8,10 +11,20 @@ class WidgetList {
   void add(Button w) {
     widgets.add(w);
   }
+  
+  void addDrop(dropDownSearch s) {
+    widgetsSearch.add(s);
+    
+  }
 
-  void display() {
+  void displayWidgets() {
     for (Button w : widgets) {
       w.display();
+    }
+    
+    for (dropDownSearch s: widgetsSearch) {
+      s.display();
+      
     }
   }
 
@@ -30,5 +43,11 @@ class WidgetList {
       w.pressed = false;
     }
   }
+  
+  void handleSearchEvents() {
+  for (dropDownSearch s : widgetsSearch) {
+    s.handleEvent();
+  }
+}
   
 }

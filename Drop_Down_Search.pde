@@ -41,6 +41,8 @@ class dropDownSearch implements Widget
   
   void display() {
     // --- Draw button ---
+    pushStyle();
+    pushMatrix();
     if (contains(mouseX, mouseY) && !expanded) fill(hoverColor);
     else fill(expanded ? color(220, 220, 255) : buttonColor);
     stroke(50);
@@ -49,9 +51,11 @@ class dropDownSearch implements Widget
     
     // --- Draw button text ---
     fill(0);
-    textAlign(CENTER, CENTER);
+    textAlign(LEFT, CENTER);
     textFont(myFont);
     textSize(10);
+    popMatrix();
+    
     
     if (expanded) {
       // Show typed search text with blinking cursor
@@ -63,7 +67,7 @@ class dropDownSearch implements Widget
       // truncate() shortens it if the text is too wide to fit inside the button width.
       text(truncate(filteredItems.get(selectedIndex)), x + w/2, y + h/2);
     } else {
-      text(label, x + w/2, y + h/2);
+      text(label, x +5 , y + h/2);
     }
     
     // --- Draw dropdown arrow ---
@@ -83,10 +87,14 @@ class dropDownSearch implements Widget
       rect(x, dropY, w, panelH, 0, 0, 4, 4);            //bottom corners rounded only
       
       if (filteredItems.size() == 0) {
-        fill(160); textAlign(CENTER, CENTER); textSize(12);    //no match case
+        pushMatrix();
+        fill(160); textAlign(LEFT, CENTER); textSize(12);    //no match case
         text("No results", x + w/2, dropY + ITEM_HEIGHT/2);
-      } else {                                                //display the text for each tiem 
+        popMatrix();
+      } else {   
+        pushMatrix(); //display the text for each tiem 
         textAlign(LEFT, CENTER); textSize(12);
+        popMatrix();
         for (int i = 0; i < visibleCount; i++) {              //cycle through index of each item 
           int itemY = dropY + i * ITEM_HEIGHT;                //y position of each item 
           boolean isHovered = (mouseX >= x && mouseX <= x+w && mouseY >= itemY && mouseY <= itemY+ITEM_HEIGHT);
@@ -103,7 +111,7 @@ class dropDownSearch implements Widget
         }
       }
     }
-
+popStyle();
   }
   
   // Shortens text so it doesn't overflow the button/row width
@@ -134,7 +142,9 @@ class dropDownSearch implements Widget
     // If the click was on the main button (between top and bottom edge of button):
     // toggle the dropdown — if it was open, close it; if closed, open it.
     if (mouseY >= y && mouseY <= y+h) {
+      pushMatrix();
       expanded = !expanded;
+      popMatrix();
       // If we just opened it, clear any previous search and reset the list to show everything
       if (expanded) { searchText = ""; updateFilter(); }
       return; // stop here, don't fall through to the row-click code below
