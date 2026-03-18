@@ -1,4 +1,4 @@
-////=====================
+////===================== //<>// //<>//
 ////==== Main Screen ====
 ////=====================
 
@@ -11,6 +11,10 @@ import java.util.Set;
 import java.util.HashSet;
 
 // For Sreach //<>//
+//background and gifs
+PImage bg;
+Gif tickerScreen;
+
 Boolean typing = false;
 String currentSearchString = "";
 Searcher search;
@@ -73,6 +77,11 @@ void setup() {
   w4.resize(300, 300);
   walkers.add(w4);
   
+  // Background and gifs
+  bg = loadImage("background1.png");
+  tickerScreen = new Gif(this, "gifscreen.gif");
+  tickerScreen.loop(); // plays continuously
+  
 //  // Search Test
   search = new Searcher(flights); //<>//
   testFlights = search.Search("1/1/2022", "", -1, "JFK", "New York, NY", "", -1, "LAX", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
@@ -92,7 +101,10 @@ void setup() {
       homeScreen.drawWelcomeScreen(); //<>//
      }
      else {
-      background(255);
+      // Fraw Background and gifs
+      image(bg, 0, 0);
+      image(tickerScreen, 600, 10, 780, 110);
+      
       fill(255);
       if (showFlights) {
         textFont(text);
