@@ -168,4 +168,24 @@ class Searcher {
      return commonFlights;   
    }
    
+   ArrayList<String> GetDates(){
+     return new ArrayList<String>(flightDateStrings.keySet());
+   }
+   
+   ArrayList<String> GetOrigins(){
+     return new ArrayList<String>(flightOrigins.keySet());
+   }
+   
+   ArrayList<String> GetOriginCityNames(){
+     return new ArrayList<String>(flightOriginCityNames.keySet());
+   }
+   
+   ArrayList<String> GetDestinations(){
+     return new ArrayList<String>(flightDestination.keySet());
+   }
+   
+   ArrayList<String> GetDestinationCityNames(){
+     return new ArrayList<String>(flightDestinationCityName.keySet());
+   }
+   
 }
