@@ -1,5 +1,5 @@
 //====================
-// Drawing Map Screen (one off object)
+// Drawing Graph Screen (one off object)
 //====================
 
 // draw things when this screen is selected
