@@ -4,6 +4,8 @@
 
 // TODO here: draw guy walking and looking at secondary screen
 
+// draw guy walking and looking at secondary screen
+import gifAnimation.*;
 // Declarations:
 import java.util.Set;
 import java.util.HashSet;
@@ -22,6 +24,7 @@ boolean printedOnce = false;
 boolean showMap = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
+ArrayList<Walking> walkers = new ArrayList<Walking>();
 ArrayList<String> temp = new ArrayList<String>();
 public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
 Search_Results result; //<>//
