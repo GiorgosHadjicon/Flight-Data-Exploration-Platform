@@ -1,6 +1,6 @@
 class Flight {
-
   Date flightDate;
+  String flightDateString;
   String mktCarrier;
   int mktCarrierFlightNum;
   String origin;
@@ -24,6 +24,7 @@ class Flight {
         int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, float cancelled, float diverted, float distance) {
     
         this.flightDate = new Date(flightDate);
+        flightDateString = this.flightDate.getDateString();
         this.mktCarrier = mktCarrier; 
         this.mktCarrierFlightNum = mktCarrierFlightNum;
         this.origin = origin; 
@@ -56,9 +57,70 @@ class Flight {
         this.distance = distance;
   }
   
-  String getData() {
+  String getDate() {
     String data = "";
-    data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year + ", " + origin + ", " + destination + ", " + arrivalTime;
+    data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year;
+    return data;
+  }
+
+  String getOriginCityName() {
+    String data = "";
+    data += originCityName;
+    return data;
+  }
+  
+  String getDestinationCityName() {
+    String data = "";
+    data += destinationCityName;
+    return data;
+  }
+  
+  String getDepartureTime() {
+    String data = "";
+    if (this.departureTime >= 1000) {
+      data += departureTime;
+    }
+    
+    else  if (this.departureTime >= 100){
+      data += "0" + departureTime;
+    }
+    
+    else  if (this.departureTime >= 10){
+      data += "00" + departureTime;
+    }
+    
+    else  if (this.departureTime >= 1){
+      data += "000" + departureTime;
+    }
+    
+    else {
+      data = "0000";
+    }
+    
+    return data;
+  }
+  
+    String getArrivalTime() {
+    String data = "";
+    if (this.arrivalTime >= 1000) {
+      data += arrivalTime;
+    }
+    
+    else  if (this.arrivalTime >= 100){
+      data += "0" + arrivalTime;
+    }
+    
+    else  if (this.arrivalTime >= 10){
+      data += "00" + arrivalTime;
+    }
+    
+    else  if (this.arrivalTime >= 1){
+      data += "000" + arrivalTime;
+    }
+    
+    else {
+      data = "0000";
+    }
     return data;
   }
   
