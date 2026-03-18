@@ -24,12 +24,20 @@ void mousePressed() {
     }
     else if (event == 1) {
       if (!showFlights) {
-      showFlights = true;
-      clicked.pressed = true;
+        showFlights = true;
+        clicked.pressed = true;
+        if (walkers.get(0).state != 3) {
+          walkers.get(0).handleClick();
+
+        }
       }
       else {
       showFlights = false;
       clicked.pressed = false;
+      if (walkers.get(0).state == 2) {
+          walkers.get(0).handleClick();
+
+        }
       }
     }
     else if (event == 2) {
@@ -38,9 +46,17 @@ void mousePressed() {
     else if (event == 3) {
       if (!showMap) {
         showMap = true;
+        if (walkers.get(1).state != 3) {
+
+          walkers.get(1).handleClick();
+        }
       }
       else {
         showMap = false;
+        if (walkers.get(1).state == 2) {
+          walkers.get(1).handleClick();
+
+        }
       }
     }
   }

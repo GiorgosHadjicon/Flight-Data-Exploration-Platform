@@ -24,7 +24,7 @@ boolean printedOnce = false;
 boolean showMap = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
-ArrayList<Walking> walkers = new ArrayList<Walking>();
+public ArrayList<Walking> walkers = new ArrayList<Walking>();
 ArrayList<String> temp = new ArrayList<String>();
 public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
 Search_Results result; //<>//
@@ -56,6 +56,22 @@ void setup() {
     String displayString = currentFlight.getDate(); // Uses data from string
     temp.add(displayString);
   }
+// WALKING ANIMATIONS
+  Walking w1 = new Walking(this, height - 225, "BlueShirtwalk.gif", "guyLook.gif");
+  w1.resize(300, 300);
+  walkers.add(w1);
+  
+  Walking w2 = new Walking(this, height - 220, "guyRun.gif", "guyTurn.gif");
+  w2.resize(300, 300);
+  walkers.add(w2);
+  
+  Walking w3 = new Walking(this, height - 150, "girlWalk.gif", "girlTurn.gif");
+  w3.resize(200, 200);
+  walkers.add(w3);
+  
+  Walking w4 = new Walking(this, height - 220, "ggWalk.gif", "ggTurn.gif");
+  w4.resize(300, 300);
+  walkers.add(w4);
   
 //  // Search Test
   search = new Searcher(flights); //<>//
@@ -89,5 +105,12 @@ void setup() {
         mapScreen.drawMap();
       }
       widgetList.displayWidgets();
+      for (Walking w : walkers) {
+        w.update();
+        w.display();
+      }
      }
+     
+
+
 }

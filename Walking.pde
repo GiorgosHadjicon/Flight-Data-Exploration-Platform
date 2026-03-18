@@ -65,6 +65,9 @@ class Walking {
     if (abs(x - targetX) > speed) {
       x += (x < targetX) ? speed : -speed;
     }
+    if (state == 1 && (x >= targetX *0.99)) {
+      state++;
+    }
   }
 
   void display() {
