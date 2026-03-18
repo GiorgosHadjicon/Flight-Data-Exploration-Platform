@@ -5,6 +5,7 @@
 //(keep variable declarations in setting up)
 
 // draw guy walking and looking at secondary screen
+import gifAnimation.*;
 
 PFont text;
 PFont myFont;
@@ -13,6 +14,7 @@ boolean showFlights = false;
 boolean printedOnce = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
+ArrayList<Walking> walkers = new ArrayList<Walking>();
 //Table table;
 
 void setup() {
@@ -25,6 +27,21 @@ void setup() {
   
   flights = cr.readCSV("flights2k.csv");
   
+Walking w1 = new Walking(this, height - 225, "BlueShirtwalk.gif", "guyLook.gif");
+  w1.resize(300, 300);
+  walkers.add(w1);
+  
+  Walking w2 = new Walking(this, height - 220, "guyRun.gif", "guyTurn.gif");
+  w2.resize(300, 300);
+  walkers.add(w2);
+  
+  Walking w3 = new Walking(this, height - 150, "girlWalk.gif", "girlTurn.gif");
+  w3.resize(200, 200);
+  walkers.add(w3);
+  
+  Walking w4 = new Walking(this, height - 220, "ggWalk.gif", "ggTurn.gif");
+  w4.resize(300, 300);
+  walkers.add(w4);
 }
 
   void draw(){
@@ -49,6 +66,27 @@ void setup() {
     
   }
  }
+ drawButtons();
+
+for (Walking w : walkers) {
+  w.update();
+  w.display();
+ }
+}
+
+void drawButtons() {
+
+  for(int i = 0; i < walkers.size(); i++) {
+    // Check if mouse is over button (Updated size & spacing from test sketch)
+    if (mouseX > 50 && mouseX < 80 && mouseY > 40 + (i * 45) && mouseY < 70 + (i * 45)) {
+      fill(250, 120, 126); // hover color pink
+    } 
+    else {
+      fill(200); // normal color (grey)
+    }
+    // Draw buttons
+    rect(50, 40 + (i * 45), 30, 30);
+  }
 }
 
 void mousePressed() {
@@ -65,6 +103,15 @@ void mousePressed() {
         System.out.println(flights.get(i).getData());
       }
       printedOnce = true;
+    }
+  }
+ if (mouseX > 50 && mouseX < 80) {
+    for (int i = 0; i < walkers.size(); i++) {
+      if (mouseY > 40 + (i * 45) && mouseY < 70 + (i * 45)) {
+        // Changed from .toggle() to .handleClick() to match your new class
+        walkers.get(i).handleClick(); 
+      }
+
     }
   }
 }
