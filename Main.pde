@@ -114,7 +114,7 @@ void setup() {
         textSize(10);
         textAlign(LEFT);
         
-        result.drawDeparture(1);
+        result.drawDeparture();
       }
       else if (showMap) {
         mapScreen.drawMap();

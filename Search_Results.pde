@@ -11,6 +11,7 @@ class Search_Results {
   PFont textDisplay;
   WidgetList flightWidgetList;
   boolean buttonsCreated = false;
+  int pageNum = 1;
   
   // Constructor takes in array of flights that has been already filtered and stores them
   Search_Results(ArrayList<Flight> flightsFiltered) {
@@ -22,7 +23,7 @@ class Search_Results {
   }
   
   
-  void drawDeparture(int pageNum) {
+  void drawDeparture() {
     
     stroke(0);
     strokeWeight(0);
@@ -35,21 +36,22 @@ class Search_Results {
     // Creates buttons for choosing date, origin, destination, departure time, and arrival time
     if (!buttonsCreated) {
       textSize(13);
-      flightWidgetList.add( new Button(352, 250, 70, 40, "Date", color(180), color(120), color(0, 255, 0) , 2) );
-      flightWidgetList.add( new Button(442, 250, 80, 40, "Origin", color(180), color(120), color(0, 255, 0) , 2) );
-      flightWidgetList.add( new Button(542, 250, 120, 40, "Origin City", color(180), color(120), color(0, 255, 0), 2) );
-      flightWidgetList.add( new Button(682, 250, 125, 40, "Destination", color(180), color(120), color(0, 255, 0), 2) );
-      flightWidgetList.add( new Button(827, 250, 165, 40, "Destination City", color(180), color(120), color(0, 255, 0), 2) );
-      flightWidgetList.add( new Button(1012, 250, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0), 2) );
-      flightWidgetList.add( new Button(1082, 250, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(352, 170, 70, 40, "Date", color(180), color(120), color(0, 255, 0) , 2) );
+      flightWidgetList.add( new Button(442, 170, 80, 40, "Origin", color(180), color(120), color(0, 255, 0) , 2) );
+      flightWidgetList.add( new Button(542, 170, 120, 40, "Origin City", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(682, 170, 125, 40, "Destination", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(827, 170, 165, 40, "Destination City", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(1012, 170, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0), 2) );
+      flightWidgetList.add( new Button(1082, 170, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0), 2) );
     }
     
     for (int i = (pageNum - 1) * 10; i < flightsFiltered.size(); i++) {
       Flight currentFlight = flightsFiltered.get(i);
       if (yIncrement <= 9) {
         yIncrement++;
-        int yPos = 300 + (yIncrement * 25); // Spacing each line 40 pixels apart
+        int yPos = 220 + (yIncrement * 25); // Spacing each line 40 pixels apart
         fill(0);
+        
         textSize(13);
         if (!buttonsCreated) {
           flightWidgetList.add( new Button(352, yPos - 10, 780, 20, "", color(180), color(200), color(0, 255, 0), 3) );
