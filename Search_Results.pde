@@ -27,7 +27,7 @@ class Search_Results {
     stroke(0);
     strokeWeight(0);
     fill(255);
-    rect(332, 145, 834, 462);
+    rect(332, 145, 834, 463);
     
     flightWidgetList.displayWidgets();
     int yIncrement = 0;

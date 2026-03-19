@@ -48,13 +48,13 @@ void setup() {
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
   widgetList = new WidgetList();
-  widgetList.add(new Button(690, 150, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 1));
-  widgetList.add(new Button(820, 150, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 3));
-  widgetList.addDrop(new dropDownSearch(340, 160, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(410, 160, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(480, 160, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(550, 160, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(620, 160, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
+  widgetList.add(new Button(360, 45, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 1)); // 820
+  widgetList.add(new Button(490, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 3));
+  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
+  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
+  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
+  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
+  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
   flights = cr.readCSV("flights2k.csv");
   for (int i = 0; i < flights.size(); i++)
   {
@@ -105,9 +105,10 @@ void setup() {
     else {
       // Fraw Background and gifs
       image(bg, 0, 0);
-      image(tickerScreen, 600, 10, 780, 110);
-      
-      fill(255);
+      image(tickerScreen, 640, 10, 780, 110);
+      fill(0);
+      rect(332, 145, 834, 463);
+  
       if (showFlights) {
         textFont(text);
         textSize(10);
@@ -118,7 +119,11 @@ void setup() {
       else if (showMap) {
         mapScreen.drawMap();
       }
+      
+      pushStyle();
       widgetList.displayWidgets();
+      popStyle();
+      
       for (Walking w : walkers) {
         w.update();
         w.display();
