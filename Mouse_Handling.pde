@@ -15,7 +15,7 @@ void mousePressed() {
   Button clicked = widgetList.getEvent(mouseX, mouseY);
   
   // If a widget was clicked, print
-  if (clicked != null) {
+  if (clicked != null && widgetList.isActive && !isDropDownSearchExpanded) {
 
     int event = clicked.getEvent();
   

@@ -137,13 +137,14 @@ popStyle();
   
   void handleEvent() {
     // If the click was outside the button AND the dropdown panel, close everything and stop.
-    if (!contains(mouseX, mouseY)) { expanded = false; return; }
+    if (!contains(mouseX, mouseY)) { expanded = false; isDropDownSearchExpanded = false; return; }
     
     // If the click was on the main button (between top and bottom edge of button):
     // toggle the dropdown — if it was open, close it; if closed, open it.
     if (mouseY >= y && mouseY <= y+h) {
       pushMatrix();
       expanded = !expanded;
+      isDropDownSearchExpanded = !isDropDownSearchExpanded;
       popMatrix();
       // If we just opened it, clear any previous search and reset the list to show everything
       if (expanded) { searchText = ""; updateFilter(); }
@@ -162,6 +163,7 @@ popStyle();
       if (clickedRow >= 0 && clickedRow < min(MAX_VISIBLE, filteredItems.size())) {
         selectedIndex = clickedRow;
         expanded = false;
+        isDropDownSearchExpanded = false;
         println("Selected: " + filteredItems.get(selectedIndex));
       }
     }

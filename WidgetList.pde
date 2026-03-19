@@ -2,6 +2,7 @@
 
 class WidgetList {
   ArrayList<Button> widgets;
+  boolean isActive = false;
 
 
   WidgetList() {
@@ -18,6 +19,7 @@ class WidgetList {
   }
 
   void displayWidgets() {
+    isActive = true;
     for (Button w : widgets) {
       w.display();
     }

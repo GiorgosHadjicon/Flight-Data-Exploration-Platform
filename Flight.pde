@@ -69,6 +69,18 @@ class Flight {
     return data;
   }
   
+  String getOriginAirport() {
+    String data = "";
+    data += origin;
+    return data;
+  }
+  
+  String getDestinationAirport() {
+    String data = "";
+    data += destination;
+    return data;
+  }
+  
   String getDestinationCityName() {
     String data = "";
     data += destinationCityName;
