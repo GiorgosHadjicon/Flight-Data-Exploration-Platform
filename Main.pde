@@ -14,6 +14,8 @@ import java.util.HashSet;
 //background and gifs
 PImage bg;
 Gif tickerScreen;
+Gif add1;
+Gif add2;
 
 Boolean typing = false;
 String currentSearchString = "";
@@ -55,7 +57,7 @@ void setup() {
   widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
   widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
   widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  flights = cr.readCSV("flights2k.csv");
+  flights = cr.readCSV("flights10k.csv");
   for (int i = 0; i < flights.size(); i++)
   {
     Flight currentFlight = flights.get(i);
@@ -83,6 +85,10 @@ void setup() {
   bg = loadImage("background1.png");
   tickerScreen = new Gif(this, "gifscreen.gif");
   tickerScreen.loop(); // plays continuously
+  add1 = new Gif(this, "addV1.gif");
+  add1.loop();
+  add2 = new Gif(this, "SatisfatoryGitFinal.gif");
+  add2.loop();
   
 //  // Search Test
   search = new Searcher(flights); //<>//
@@ -106,6 +112,8 @@ void setup() {
       // Fraw Background and gifs
       image(bg, 0, 0);
       image(tickerScreen, 640, 10, 780, 110);
+      image(add1, 1044, 179);
+      image(add2, 1075, 515);
       fill(0);
       rect(332, 145, 834, 463);
   
