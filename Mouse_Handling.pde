@@ -6,7 +6,7 @@ final int EVENT_NONE = 0;
 final int EVENT_PRINT_SCREEN  = 1;
 final int EVENT_DISPLAY_SINGLE_FLIGHT = 2;
 final int SHOW_MAP = 3;
-final int CHANGE_PAGE = 4;
+final int EVENT_CHANGE_PAGE = 4;
 
 void mousePressed() {
   showWelcome = false; // boolean to change welcome screen 
@@ -33,6 +33,7 @@ void mousePressed() {
       }
       else {
       showFlights = false;
+      widgetList.clearFlightsScreen();
       clicked.pressed = false;
       if (walkers.get(0).state == 2) {
           walkers.get(0).handleClick();
@@ -59,7 +60,7 @@ void mousePressed() {
         }
       }
     }
-    else if (event == CHANGE_PAGE) {
+    else if (event == EVENT_CHANGE_PAGE) {
       pageNum = Integer.parseInt(clicked.label);
       pageChange = true;
     }

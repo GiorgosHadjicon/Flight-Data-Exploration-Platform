@@ -49,17 +49,24 @@ class Search_Results {
       else {
         iSet = (pageNum - 1) * 12;
         
-        if (flightsFiltered.size()  % 11 == 0) {
-          totalCountPages = flightsFiltered.size() / 11;
+        if (flightsFiltered.size()  % 12 == 0) {
+          totalCountPages = flightsFiltered.size() / 12;
         }
         else {
-          totalCountPages = (int)(flightsFiltered.size() / 11) + 1;
+          totalCountPages = (int)(flightsFiltered.size() / 12) + 1;
         }
       }
     }
         
       for (int i = 1; i <= totalCountPages; i++) {
-        widgetList.add( new Button(670 + (i * 25), 550, 20, 20, String.valueOf(i), color(180), color(120), color(0, 255, 0) , CHANGE_PAGE) ); 
+        if (totalCountPages >= 9) {
+          if (i <= 8) {
+            widgetList.add( new Button(630 + (i * 25), 550, 20, 20, String.valueOf(i), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
+          }
+        }
+        else {
+          widgetList.add( new Button(670 + (i * 25), 550, 20, 20, String.valueOf(i), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
+        }
       }    
 
     if (pageChange) {
