@@ -12,11 +12,12 @@ class dropDownSearch implements Widget
   ArrayList<String> items;         // Full master list from main
   ArrayList<String> filteredItems; // Items matching current search
   int selectedIndex = -1;          // Which item is selected (-1 = none)
+  String itemName;
   
   final int ITEM_HEIGHT = 24;
   final int MAX_VISIBLE = 6;
   
-  dropDownSearch(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, ArrayList<String> items) {
+  dropDownSearch(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, ArrayList<String> items, String itemName) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -26,6 +27,12 @@ class dropDownSearch implements Widget
     this.hoverColor = hoverColor;
     this.items = items;
     this.filteredItems = new ArrayList<String>(items);  //just make a copy of master list for now 
+    this.itemName = itemName;
+  }
+
+  String getItemName()
+  {
+    return itemName;
   }
   
   // Rebuilds filteredItems to only show items containing the search text
@@ -42,7 +49,7 @@ class dropDownSearch implements Widget
   void display() {
     // --- Draw button ---
     pushStyle();
-    pushMatrix();
+    
     if (contains(mouseX, mouseY) && !expanded) fill(hoverColor);
     else fill(expanded ? color(220, 220, 255) : buttonColor);
     stroke(50);
@@ -54,20 +61,19 @@ class dropDownSearch implements Widget
     textAlign(LEFT, CENTER);
     textFont(myFont);
     textSize(10);
-    popMatrix();
     
     
     if (expanded) {
       // Show typed search text with blinking cursor
       String cursor = (frameCount % 40 < 20) ? "|" : "";
-      text(searchText + cursor, x + w/2, y + h/2);
+      text(searchText + cursor, x + 5, y + h/2);
     } else if (selectedIndex >= 0 && selectedIndex < filteredItems.size()) {
       // A item has been chosen from the dropdown —
       // retrieve it from filteredItems using selectedIndex and display it on the button.
       // truncate() shortens it if the text is too wide to fit inside the button width.
-      text(truncate(filteredItems.get(selectedIndex)), x + w/2, y + h/2);
+      text(truncate(filteredItems.get(selectedIndex)), x + 5, y + h/2);
     } else {
-      text(label, x +5 , y + h/2);
+      text(label, x + 5 , y + h/2);
     }
     
     // --- Draw dropdown arrow ---
@@ -87,14 +93,11 @@ class dropDownSearch implements Widget
       rect(x, dropY, w, panelH, 0, 0, 4, 4);            //bottom corners rounded only
       
       if (filteredItems.size() == 0) {
-        pushMatrix();
-        fill(160); textAlign(LEFT, CENTER); textSize(12);    //no match case
+        fill(160); textAlign(CENTER, CENTER); textSize(12); //no match case
         text("No results", x + w/2, dropY + ITEM_HEIGHT/2);
-        popMatrix();
       } else {   
-        pushMatrix(); //display the text for each tiem 
+        //display the text for each tiem 
         textAlign(LEFT, CENTER); textSize(12);
-        popMatrix();
         for (int i = 0; i < visibleCount; i++) {              //cycle through index of each item 
           int itemY = dropY + i * ITEM_HEIGHT;                //y position of each item 
           boolean isHovered = (mouseX >= x && mouseX <= x+w && mouseY >= itemY && mouseY <= itemY+ITEM_HEIGHT);
@@ -111,16 +114,26 @@ class dropDownSearch implements Widget
         }
       }
     }
-popStyle();
+    popStyle();
   }
   
   // Shortens text so it doesn't overflow the button/row width
   String truncate(String s) {
-    textSize(9);
-    while (s.length() > 5) {
-      s = s.substring(0, s.length() - 1);
+    if (itemName.equals("originsCityName") || itemName.equals("destinationsCityName"))
+    {
+      textSize(10);
+      while (s.length() > 5) {
+        s = s.substring(s.length()-2, s.length());
+      }
+      return s;
+    }
+    else if (itemName.equals("date") )
+    { 
+      textSize(8);
+      return s;
     }
     return s;
+
   }
   
   boolean contains(int mx, int my) {
@@ -135,20 +148,18 @@ popStyle();
     return false;
   }
   
-  void handleEvent() {
+  String handleEvent() {
     // If the click was outside the button AND the dropdown panel, close everything and stop.
-    if (!contains(mouseX, mouseY)) { expanded = false; isDropDownSearchExpanded = false; return; }
+    if (!contains(mouseX, mouseY)) { expanded = false; isDropDownSearchExpanded = false; return ""; }
     
     // If the click was on the main button (between top and bottom edge of button):
     // toggle the dropdown — if it was open, close it; if closed, open it.
     if (mouseY >= y && mouseY <= y+h) {
-      pushMatrix();
       expanded = !expanded;
       isDropDownSearchExpanded = !isDropDownSearchExpanded;
-      popMatrix();
       // If we just opened it, clear any previous search and reset the list to show everything
       if (expanded) { searchText = ""; updateFilter(); }
-      return; // stop here, don't fall through to the row-click code below
+        return ""; // stop here, don't fall through to the row-click code below
     }
     // If we get here, the click was inside the dropdown panel (not the button).
     // Work out which row was clicked by taking the mouse Y position,
@@ -165,8 +176,11 @@ popStyle();
         expanded = false;
         isDropDownSearchExpanded = false;
         println("Selected: " + filteredItems.get(selectedIndex));
+        
+        return filteredItems.get(selectedIndex);
       }
     }
+    return "";
   }
   
   // Handles typing to filter the list
