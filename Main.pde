@@ -53,6 +53,7 @@ boolean pageChange = false;
 
 void setup() {
   frameRate(120);
+  pixelDensity(1);
   usaMap = loadImage("usa_map.jpg");
   mapScreen = new MapScreen(usaMap);
   size(1500, 850);
