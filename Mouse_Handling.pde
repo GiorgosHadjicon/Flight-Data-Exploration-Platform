@@ -6,7 +6,7 @@ final int EVENT_NONE = 0;
 final int EVENT_PRINT_SCREEN  = 1;
 final int EVENT_DISPLAY_SINGLE_FLIGHT = 2;
 final int SHOW_MAP = 3;
-final int EVENT_BTN2 = 4;
+final int EVENT_CHANGE_PAGE = 4;
 
 void mousePressed() {
   showWelcome = false; // boolean to change welcome screen 
@@ -15,14 +15,14 @@ void mousePressed() {
   Button clicked = widgetList.getEvent(mouseX, mouseY);
   
   // If a widget was clicked, print
-  if (clicked != null && widgetList.isActive && !isDropDownSearchExpanded) {
+  if (clicked != null) {
 
-    int event = clicked.getEvent();
-  
-    if (event == 0) {
+    int event = clicked.getEvent();    
+ 
+    if (event == EVENT_NONE) {
       
     }
-    else if (event == 1) {
+    else if (event == EVENT_PRINT_SCREEN) {
       if (!showFlights) {
         showFlights = true;
         clicked.pressed = true;
@@ -33,6 +33,7 @@ void mousePressed() {
       }
       else {
       showFlights = false;
+      widgetList.clearFlightsScreen();
       clicked.pressed = false;
       if (walkers.get(0).state == 2) {
           walkers.get(0).handleClick();
@@ -40,10 +41,10 @@ void mousePressed() {
         }
       }
     }
-    else if (event == 2) {
-      
+    else if (event == EVENT_DISPLAY_SINGLE_FLIGHT) {
+ 
     }
-    else if (event == 3) {
+    else if (event == SHOW_MAP) {
       if (!showMap) {
         showMap = true;
         if (walkers.get(1).state != 3) {
@@ -58,6 +59,10 @@ void mousePressed() {
 
         }
       }
+    }
+    else if (event == EVENT_CHANGE_PAGE) {
+      pageNum = Integer.parseInt(clicked.label);
+      pageChange = true;
     }
   }
 }

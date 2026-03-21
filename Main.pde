@@ -38,32 +38,40 @@ HomeScreen homeScreen = new HomeScreen();
 PImage usaMap;
 MapScreen mapScreen;
 public boolean isDropDownSearchExpanded = false; 
+ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
+ArrayList<String> origins = new ArrayList<String>();
+ArrayList<String> originsCityName = new ArrayList<String>();
+ArrayList<String> destinations = new ArrayList<String>();
+ArrayList<String> destinationsCityName = new ArrayList<String>();
+String dateDataBlock = "1/1/2022";
+String originDataBlock = "";
+String originCityName = "";
+String destination = "";
+String destinationCityName = "";
+int pageNum = 1;
+boolean pageChange = false;
 //Table table;
 
 
 void setup() {
   frameRate(120);
+  pixelDensity(1);
   usaMap = loadImage("usa_map.jpg");
   mapScreen = new MapScreen(usaMap);
   size(1500, 850);
   text = loadFont("AlTarikh-24.vlw");
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
-  widgetList = new WidgetList();
-  widgetList.add(new Button(360, 45, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 1)); // 820
-  widgetList.add(new Button(490, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), 3));
-  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), temp)); 
-  flights = cr.readCSV("flights10k.csv");
+  flights = cr.readCSV("flights2k.csv");
+  
   for (int i = 0; i < flights.size(); i++)
   {
     Flight currentFlight = flights.get(i);
     String displayString = currentFlight.getDate(); // Uses data from string
     temp.add(displayString);
   }
+  
+  
 // WALKING ANIMATIONS
   Walking w1 = new Walking(this, height - 225, "BlueShirtwalk.gif", "guyLook.gif");
   w1.resize(300, 300);
@@ -102,6 +110,22 @@ void setup() {
   } 
   result = new Search_Results(testFlights);
 //  // Search test end
+
+//  //creating ArrayLists for each data block
+  date = search.GetDates();
+  origins = search.GetOrigins();
+  originsCityName = search.GetOriginCityNames();
+  destinations = search.GetDestinations();
+  destinationsCityName = search.GetDestinationCityNames();
+  
+  widgetList = new WidgetList();
+  widgetList.add(new Button(360, 45, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN)); 
+  widgetList.add(new Button(490, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), SHOW_MAP));
+  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), date, "date")); 
+  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
+  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
+  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
+  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
 }
 
   void draw(){
@@ -116,21 +140,22 @@ void setup() {
       image(add2, 1075, 515);
       fill(0);
       rect(332, 145, 834, 463);
-  
+      pushStyle();
+      widgetList.displayWidgets();
+      popStyle();
       if (showFlights) {
         textFont(text);
         textSize(10);
         textAlign(LEFT);
         
-        result.drawDeparture(1);
+        result.drawDeparture(pageNum);
+
       }
       else if (showMap) {
         mapScreen.drawMap();
       }
       
-      pushStyle();
-      widgetList.displayWidgets();
-      popStyle();
+      
       
       for (Walking w : walkers) {
         w.update();
