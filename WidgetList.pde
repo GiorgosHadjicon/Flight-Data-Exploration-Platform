@@ -15,8 +15,9 @@ class WidgetList {
   }
   
   void addDrop(dropDownSearch s) {
+    pushStyle();
     widgetsSearch.add(s);
-    
+    popStyle();
   }
 
   void displayWidgets() {
@@ -49,11 +50,18 @@ class WidgetList {
   
   void clearFlights() {
   for (int i = widgets.size() - 1; i >= 0; i--) {
-    if (widgets.get(i).getEvent() == EVENT_DISPLAY_SINGLE_FLIGHT) {
+    if (widgets.get(i).getEvent() == EVENT_DISPLAY_SINGLE_FLIGHT || widgets.get(i).getEvent() == EVENT_CHANGE_PAGE) {
       widgets.remove(i);
     }
   }
 }
+  void clearFlightsScreen() {
+    for (int i = widgets.size() - 1; i >= 0; i--) {
+      if (widgets.get(i).getEvent() == EVENT_DISPLAY_SINGLE_FLIGHT || widgets.get(i).getEvent() == EVENT_NONE || widgets.get(i).getEvent() == EVENT_CHANGE_PAGE) {
+        widgets.remove(i);
+      }
+    }
+  }
   
   void handleSearchEvents() {
     for (dropDownSearch s : widgetsSearch) {
@@ -105,7 +113,7 @@ class WidgetList {
         }
       }
   
-      testFlights = search.Search(dateDataBlock, "", -1, originDataBlock, originCityName, "", -1, "LAX", "", "", -1, -1, -1, -1, -1, false, false, -1);
+      testFlights = search.Search(dateDataBlock, "", -1, originDataBlock, originCityName, "", -1, destination, destinationCityName, "", -1, -1, -1, -1, -1, false, false, -1);
       result = new Search_Results(testFlights);
     }
   }

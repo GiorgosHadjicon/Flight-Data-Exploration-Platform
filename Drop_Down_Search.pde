@@ -175,6 +175,8 @@ class dropDownSearch implements Widget
         selectedIndex = clickedRow;
         expanded = false;
         isDropDownSearchExpanded = false;
+        pageChange = true;
+        pageNum = 1;
         println("Selected: " + filteredItems.get(selectedIndex));
         
         return filteredItems.get(selectedIndex);
