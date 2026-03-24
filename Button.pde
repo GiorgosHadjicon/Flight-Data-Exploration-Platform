@@ -42,7 +42,7 @@ class Button implements Widget
         strokeWeightValue = 3;
         strokeColor = color(255, 255, 0); // Yellow stroke when pressed
       }
-      else if (contains(mouseX, mouseY) && !isDropDownSearchExpanded)
+      else if (contains(mouseX, mouseY) && !widgetList.isExpanded())
       {
         currentColor = hoverColor;
         stroke(10);

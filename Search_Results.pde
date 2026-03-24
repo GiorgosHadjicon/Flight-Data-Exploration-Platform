@@ -17,7 +17,7 @@ class Search_Results {
   // Parameters: Take in an arraylist of the flights that have been filtered through the searching algorithm
   // Description: Creates another pointer to the global arraylist 'testFlights' to use in the class
   Search_Results(ArrayList<Flight> flightsFiltered) {
-  
+    pageChange = true;
     textDisplay = loadFont("AlTarikh-48.vlw");
     this.flightsFiltered = flightsFiltered;
     

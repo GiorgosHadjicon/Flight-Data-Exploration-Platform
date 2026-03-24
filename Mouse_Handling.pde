@@ -12,12 +12,12 @@ final int EVENT_RESET_DROP_DOWN = 6;
 
 void mousePressed() {
   showWelcome = false; // boolean to change welcome screen 
-
-  widgetList.handleSearchEvents();  
+  boolean dropdownUsedClick = widgetList.handleSearchEvents();
+  if (dropdownUsedClick) return;
   Button clicked = widgetList.getEvent(mouseX, mouseY);
   
   // If a widget was clicked, print
-  if (clicked != null && !isDropDownSearchExpanded) {
+  if (clicked != null && !widgetList.isExpanded()) {
 
     int event = clicked.getEvent();    
  

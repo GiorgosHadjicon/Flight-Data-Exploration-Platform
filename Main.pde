@@ -9,6 +9,7 @@ import gifAnimation.*;
 // Declarations:
 import java.util.Set;
 import java.util.HashSet;
+import processing.sound.*;
 
 // For Sreach //<>//
 //background and gifs
@@ -53,6 +54,7 @@ String destination = "";
 String destinationCityName = "";
 int pageNum = 1;
 boolean pageChange = false;
+SoundFile backgroundMusic;
 //Table table;
 
 
@@ -68,6 +70,8 @@ void setup() {
   myFont = createFont("Arial Bold", 15);
   textFont(myFont);
   flights = cr.readCSV("flights2k.csv");
+  backgroundMusic = new SoundFile(this, "AirportSound.wav");
+  backgroundMusic.loop();
   
   for (int i = 0; i < flights.size(); i++)
   {
@@ -157,6 +161,7 @@ void setup() {
         textAlign(LEFT);
         
         result.drawDeparture(pageNum);
+        
         
       if (showMap) {
         mapScreen.drawMap();
