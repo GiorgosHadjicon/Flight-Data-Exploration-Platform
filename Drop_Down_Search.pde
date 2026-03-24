@@ -150,13 +150,12 @@ class dropDownSearch implements Widget
   
   String handleEvent() {
     // If the click was outside the button AND the dropdown panel, close everything and stop.
-    if (!contains(mouseX, mouseY)) { expanded = false; isDropDownSearchExpanded = false; return ""; }
+    if (!contains(mouseX, mouseY)) { expanded = false; return ""; }
     
     // If the click was on the main button (between top and bottom edge of button):
     // toggle the dropdown — if it was open, close it; if closed, open it.
     if (mouseY >= y && mouseY <= y+h) {
       expanded = !expanded;
-      isDropDownSearchExpanded = !isDropDownSearchExpanded;
       // If we just opened it, clear any previous search and reset the list to show everything
       if (expanded) { searchText = ""; updateFilter(); }
         return ""; // stop here, don't fall through to the row-click code below
@@ -174,7 +173,6 @@ class dropDownSearch implements Widget
       if (clickedRow >= 0 && clickedRow < min(MAX_VISIBLE, filteredItems.size())) {
         selectedIndex = clickedRow;
         expanded = false;
-        isDropDownSearchExpanded = false;
         pageChange = true;
         pageNum = 1;
         println("Selected: " + filteredItems.get(selectedIndex));

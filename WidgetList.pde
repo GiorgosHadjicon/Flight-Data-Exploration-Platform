@@ -65,8 +65,9 @@ class WidgetList {
   
   void handleSearchEvents() {
     for (dropDownSearch s : widgetsSearch) {
+     
       String selectedValue = s.handleEvent();
-  
+      
       if (selectedValue != null && selectedValue != "") {
         // Update the appropriate data block based on dropdown type
         if (s.getItemName().equals("date")) {
