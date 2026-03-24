@@ -14,6 +14,8 @@ class Search_Results {
   int iSet;
   
   // Constructor takes in array of flights that has been already filtered and stores them
+  // Parameters: Take in an arraylist of the flights that have been filtered through the searching algorithm
+  // Description: Creates another pointer to the global arraylist 'testFlights' to use in the class
   Search_Results(ArrayList<Flight> flightsFiltered) {
   
     textDisplay = loadFont("AlTarikh-48.vlw");
@@ -22,6 +24,8 @@ class Search_Results {
   }
   
   
+  // Parameter: takes in the page number as an int
+  // Description: draws a display screen of the global arraylist called 'testFlights' and any changes that are made on it actively 
   void drawDeparture(int pageNum) {
     
     stroke(0);
@@ -43,6 +47,8 @@ class Search_Results {
       widgetList.add( new Button(1012, 170, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0), EVENT_NONE) );
       widgetList.add( new Button(1082, 170, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0), EVENT_NONE) );
       
+      
+     // Limits the number of flights shown in the screen and counts the number of pages it has
       if (flightsFiltered.size() < 12) {
         iSet = 0;
       }

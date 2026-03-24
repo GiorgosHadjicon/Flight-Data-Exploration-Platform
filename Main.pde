@@ -28,6 +28,7 @@ WidgetList widgetList;
 boolean showFlights = false;
 boolean printedOnce = false;
 boolean showMap = false;
+boolean showFrequencyGraph = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
 public ArrayList<Walking> walkers = new ArrayList<Walking>();
@@ -37,6 +38,8 @@ Search_Results result; //<>//
 HomeScreen homeScreen = new HomeScreen();
 PImage usaMap;
 MapScreen mapScreen;
+PImage topOrigins;
+GraphsScreen graphsScreen;
 public boolean isDropDownSearchExpanded = false; 
 ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
 ArrayList<String> origins = new ArrayList<String>();
@@ -57,7 +60,9 @@ void setup() {
   frameRate(120);
   pixelDensity(1);
   usaMap = loadImage("usa_map.jpg");
+  topOrigins = loadImage("flights_top_origins.png");
   mapScreen = new MapScreen(usaMap);
+  graphsScreen = new GraphsScreen(topOrigins);
   size(1500, 850);
   text = loadFont("AlTarikh-24.vlw");
   myFont = createFont("Arial Bold", 20);
@@ -119,9 +124,9 @@ void setup() {
   destinationsCityName = search.GetDestinationCityNames();
   
   widgetList = new WidgetList();
-  widgetList.add(new Button(360, 45, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN)); 
-  widgetList.add(new Button(490, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), SHOW_MAP));
-  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), date, "date")); 
+  widgetList.add(new Button(360, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), SHOW_MAP));
+  widgetList.add(new Button(10, 105, 140, 45, "TOP ORIGINS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_FREQUENCY_GRAPH));
+  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
   widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
   widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
   widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
@@ -129,10 +134,7 @@ void setup() {
 }
 
   void draw(){
-    if (showWelcome) {
-      homeScreen.drawWelcomeScreen(); //<>//
-     }
-    else {
+    //print(isDropDownSearchExpanded); //<>//
       // Fraw Background and gifs
       image(bg, 0, 0);
       image(tickerScreen, 640, 10, 780, 110);
@@ -140,21 +142,28 @@ void setup() {
       image(add2, 1075, 515);
       fill(0);
       rect(332, 145, 834, 463);
-      pushStyle();
-      widgetList.displayWidgets();
-      popStyle();
-      if (showFlights) {
+      
+     if (showWelcome) {
+       homeScreen.drawWelcomeScreen();
+       pushStyle();
+       widgetList.displayWidgets();
+       popStyle();
+     }
+     else {
+       
         textFont(text);
         textSize(10);
         textAlign(LEFT);
         
         result.drawDeparture(pageNum);
-
-      }
-      else if (showMap) {
+        
+      if (showMap) {
         mapScreen.drawMap();
       }
       
+      if (showFrequencyGraph) {
+        graphsScreen.drawTopOrigins();
+      }
       
       
       for (Walking w : walkers) {
@@ -162,7 +171,6 @@ void setup() {
         w.display();
       }
      }
-     
 
 
 }

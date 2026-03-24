@@ -7,6 +7,7 @@ final int EVENT_PRINT_SCREEN  = 1;
 final int EVENT_DISPLAY_SINGLE_FLIGHT = 2;
 final int SHOW_MAP = 3;
 final int EVENT_CHANGE_PAGE = 4;
+final int EVENT_FREQUENCY_GRAPH = 5;
 
 void mousePressed() {
   showWelcome = false; // boolean to change welcome screen 
@@ -15,7 +16,7 @@ void mousePressed() {
   Button clicked = widgetList.getEvent(mouseX, mouseY);
   
   // If a widget was clicked, print
-  if (clicked != null) {
+  if (clicked != null && !isDropDownSearchExpanded) {
 
     int event = clicked.getEvent();    
  
@@ -63,6 +64,23 @@ void mousePressed() {
     else if (event == EVENT_CHANGE_PAGE) {
       pageNum = Integer.parseInt(clicked.label);
       pageChange = true;
+    }
+    
+    else if (event == EVENT_FREQUENCY_GRAPH) {
+      if (!showFrequencyGraph) {
+        showFrequencyGraph = true;
+        if (walkers.get(1).state != 3) {
+
+          walkers.get(1).handleClick();
+        }
+      }
+      else {
+        showFrequencyGraph = false;
+        if (walkers.get(1).state == 2) {
+          walkers.get(1).handleClick();
+
+        }
+      }
     }
   }
 }
