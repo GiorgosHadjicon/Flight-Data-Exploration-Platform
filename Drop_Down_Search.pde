@@ -35,6 +35,14 @@ class dropDownSearch implements Widget
     return itemName;
   }
   
+  void reset() {
+    searchText = "";
+    selectedIndex = -1;
+    expanded = false;
+    isDropDownSearchExpanded = false;
+    filteredItems = new ArrayList<String>(items);
+  }
+  
   // Rebuilds filteredItems to only show items containing the search text
   void updateFilter() {
     filteredItems.clear();

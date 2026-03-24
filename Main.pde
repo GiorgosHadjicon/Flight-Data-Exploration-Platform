@@ -65,7 +65,7 @@ void setup() {
   graphsScreen = new GraphsScreen(topOrigins);
   size(1500, 850);
   text = loadFont("AlTarikh-24.vlw");
-  myFont = createFont("Arial Bold", 20);
+  myFont = createFont("Arial Bold", 15);
   textFont(myFont);
   flights = cr.readCSV("flights2k.csv");
   
@@ -125,12 +125,13 @@ void setup() {
   
   widgetList = new WidgetList();
   widgetList.add(new Button(360, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), SHOW_MAP));
-  widgetList.add(new Button(10, 105, 140, 45, "TOP ORIGINS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_FREQUENCY_GRAPH));
+  widgetList.add(new Button(10, 205, 140, 45, "TOP ORIGINS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_FREQUENCY_GRAPH));
+  widgetList.add(new Button(10, 105, 140, 45, "RESET DROPDOWN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_RESET_DROP_DOWN));
   widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
-  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
-  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
-  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
-  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
+  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "ORIGIN", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
+  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "ORIGIN\n CITY", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
+  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "DESTIN", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
+  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "DESTIN\n CITY", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
 }
 
   void draw(){

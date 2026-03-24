@@ -8,6 +8,7 @@ final int EVENT_DISPLAY_SINGLE_FLIGHT = 2;
 final int SHOW_MAP = 3;
 final int EVENT_CHANGE_PAGE = 4;
 final int EVENT_FREQUENCY_GRAPH = 5;
+final int EVENT_RESET_DROP_DOWN = 6;
 
 void mousePressed() {
   showWelcome = false; // boolean to change welcome screen 
@@ -81,6 +82,25 @@ void mousePressed() {
 
         }
       }
+    }
+    else if (event == EVENT_RESET_DROP_DOWN)
+    {
+      // Reset all dropdowns visually
+      for (dropDownSearch s: widgetsSearch) 
+      {
+        s.reset();
+      }
+      
+      // Also reset the data blocks driving the search
+      dateDataBlock = "1/1/2022";   // or "" if you want truly no filter
+      originDataBlock = "";
+      originCityName = "";
+      destination = "";
+      destinationCityName = "";
+      
+      // Re-run the search with cleared values so results update immediately
+      testFlights = search.Search(dateDataBlock, "", -1, originDataBlock, originCityName, "", -1, destination, destinationCityName, "", -1, -1, -1, -1, -1, false, false, -1);
+      result = new Search_Results(testFlights);
     }
   }
 }
