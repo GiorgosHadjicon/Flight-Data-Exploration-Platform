@@ -40,20 +40,20 @@ void setFlight(Flight f) {
     pushStyle();
     drawBackgroundMap();
     drawFlights();
-    drawTopBar();
+    //drawTopBar();
     popStyle();
   }
   
   
   void drawBackgroundMap() {
-    background(15, 45, 80);
+    //background(15, 45, 80);
   
-      image(usaMap, 0, 80, width, height - 80);
+      image(usaMap, 332, 145, 834, 463);
   
       // blue tint overlay to match the reference style
       fill(20, 70, 110, 140);
       noStroke();
-      rect(0, 80, width, height - 80);
+      rect(332, 145, 834, 463);
    
   }
   
