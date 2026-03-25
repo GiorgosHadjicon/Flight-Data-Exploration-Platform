@@ -140,6 +140,8 @@ void setup() {
   widgetList = new WidgetList();
   widgetList.add(new Button(10, 205, 140, 45, "TOP ORIGINS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_FREQUENCY_GRAPH));
   widgetList.add(new Button(10, 105, 140, 45, "RESET DROPDOWN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_RESET_DROP_DOWN));
+  widgetList.add(new Button(10, 155, 140, 45, "HOMESCREEN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_GO_HOME_SCREEN));
+  widgetList.add(new Button(10, 255, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
   widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
   widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "ORIGIN", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
   widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "ORIGIN\n CITY", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
@@ -157,35 +159,31 @@ void setup() {
       fill(0);
       rect(332, 145, 834, 463);
       
+      pushStyle();
+      widgetList.displayWidgets();
+      popStyle();
+      
      if (showWelcome) {
        homeScreen.drawWelcomeScreen();
-       pushStyle();
-       widgetList.displayWidgets();
-       popStyle();
-     }
-     else {
-       
-        textFont(text);
-        textSize(10);
-        textAlign(LEFT);
-        
-        result.drawDeparture(pageNum);
-        
-        
-      if (showMap) {
-        mapScreen.drawMap();
-      }
-      
-      if (showFrequencyGraph) {
-        graphsScreen.drawTopOrigins();
-      }
-      
-      
-      for (Walking w : walkers) {
-        w.update();
-        w.display();
-      }
+
      }
 
+        
+     if (showFlights) { 
+       result.drawDeparture(pageNum);
+     }
 
-}
+     if (showMap) {
+       mapScreen.drawMap();
+     }
+    
+     if (showFrequencyGraph) {
+       graphsScreen.drawTopOrigins();
+     }
+    
+    
+     for (Walking w : walkers) {
+       w.update();
+       w.display();
+     }
+   }
