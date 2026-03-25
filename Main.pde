@@ -9,6 +9,8 @@ import gifAnimation.*;
 // Declarations:
 import java.util.Set;
 import java.util.HashSet;
+import processing.data.Table;
+import processing.data.TableRow;
 
 // For Sreach //<>//
 //background and gifs
@@ -16,7 +18,16 @@ PImage bg;
 Gif tickerScreen;
 Gif add1;
 Gif add2;
-
+float westLon = -124.8;
+float eastLon = -66.9;
+float northLat = 49.3;
+float southLat = 24.5;
+float mapLeft = 0;
+float mapRight = 0;
+float mapTop = 0;
+float mapBottom = 0;
+HashMap<String, Airport> airportMap = new HashMap<String, Airport>();
+Flight selectedFlight = null;
 Boolean typing = false;
 String currentSearchString = "";
 Searcher search;
@@ -62,8 +73,10 @@ void setup() {
   usaMap = loadImage("usa_map.jpg");
   topOrigins = loadImage("flights_top_origins.png");
   mapScreen = new MapScreen(usaMap);
+  loadAirports("merged_airports.csv");
   graphsScreen = new GraphsScreen(topOrigins);
   size(1500, 850);
+  calibrateMap();
   text = loadFont("AlTarikh-24.vlw");
   myFont = createFont("Arial Bold", 15);
   textFont(myFont);
