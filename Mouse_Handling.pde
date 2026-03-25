@@ -7,9 +7,10 @@ final int EVENT_PRINT_SCREEN  = 1;
 final int EVENT_DISPLAY_SINGLE_FLIGHT = 2;
 final int SHOW_MAP = 3;
 final int EVENT_CHANGE_PAGE = 4;
-final int EVENT_FREQUENCY_GRAPH = 5;
-final int EVENT_RESET_DROP_DOWN = 6;
-final int EVENT_GO_HOME_SCREEN = 7;
+final int EVENT_RESET_DROP_DOWN = 5;
+final int EVENT_DEST_PIE    = 6;
+final int EVENT_DEST_BUBBLE = 7;
+final int EVENT_GO_HOME_SCREEN = 8;
 
 void mousePressed() { 
   boolean dropdownUsedClick = widgetList.handleSearchEvents();
@@ -36,7 +37,9 @@ void mousePressed() {
       }
       showWelcome = true; // boolean to change welcome screen
       showFlights = false; // boolean to change flight screen
-      showFrequencyGraph = false; // boolean to change graph screen
+      chartPage = 0;  // reset charts
+      pieChart.reset();
+      bubbleChart.reset();
       showMap = false; // boolean to change map screen
     }
 
@@ -52,7 +55,9 @@ void mousePressed() {
         
         showWelcome = false; // boolean to change welcome screen
         showFlights = true; // boolean to change flight screen
-        showFrequencyGraph = false; // boolean to change graph screen
+        chartPage = 0;  // reset charts
+        pieChart.reset();
+        bubbleChart.reset();
         showMap = false; // boolean to change map screen
         
         if (walkers.get(0).state != 3) {
@@ -84,7 +89,9 @@ void mousePressed() {
         mapScreen.setFlight(selectedFlight);
         showWelcome = false; // boolean to change welcome screen
         showFlights = false; // boolean to change flight screen
-        showFrequencyGraph = false; // boolean to change graph screen
+        chartPage = 0;  // reset charts
+        pieChart.reset();
+        bubbleChart.reset();
         showMap = true; // boolean to change map screen
           if (walkers.get(0).state != 3) {
             walkers.get(0).handleClick();
@@ -102,9 +109,9 @@ void mousePressed() {
       pageChange = true;
     }
     
-    //TOP 10 ORIGINS GRAPH BUTTON
-    else if (event == EVENT_FREQUENCY_GRAPH) {
-      if (!showFrequencyGraph) {
+    //GRAPHS BUTTON
+    else if (event == EVENT_DEST_PIE) {
+      if (chartPage != 1) {
         widgetList.clearFlightsScreen();
         if (walkers.get(0).state == 2) {
             walkers.get(0).handleClick();
@@ -114,14 +121,41 @@ void mousePressed() {
         }
         showWelcome = false; // boolean to change welcome screen
         showFlights = false; // boolean to change flight screen
-        showFrequencyGraph = true; // boolean to change graph screen
+        chartPage = 1;  // reset charts
+        bubbleChart.reset();
         showMap = false; // boolean to change map screen
-          if (walkers.get(0).state != 3) {
+        pieChart.start(); // kick off sweep animation
+        if (walkers.get(0).state != 3) {
+          walkers.get(0).handleClick();
+        }
+        else if (walkers.get(1).state != 3) {
+          walkers.get(1).handleClick();
+        }
+      } 
+    }
+
+
+    else if (event == EVENT_DEST_BUBBLE) {
+      if (chartPage != 2) {
+        widgetList.clearFlightsScreen();
+        if (walkers.get(0).state == 2) {
             walkers.get(0).handleClick();
-          }
-          else if (walkers.get(1).state != 3) {
+        }
+        if (walkers.get(1).state == 2) {
             walkers.get(1).handleClick();
-          }
+        }
+        showWelcome = false; // boolean to change welcome screen
+        showFlights = false; // boolean to change flight screen
+        chartPage = 2;  // reset charts
+        pieChart.reset();
+        showMap = false; // boolean to change map screen
+        bubbleChart.start(); // kick off sweep animation
+        if (walkers.get(0).state != 3) {
+          walkers.get(0).handleClick();
+        }
+        else if (walkers.get(1).state != 3) {
+          walkers.get(1).handleClick();
+        }
       }
     }
     

@@ -36,7 +36,6 @@ WidgetList widgetList;
 boolean showFlights = false;
 boolean printedOnce = false;
 boolean showMap = false;
-boolean showFrequencyGraph = false;
 csvReader cr = new csvReader();
 ArrayList<Flight> flights;
 public ArrayList<Walking> walkers = new ArrayList<Walking>();
@@ -46,8 +45,6 @@ Search_Results result; //<>//
 HomeScreen homeScreen = new HomeScreen();
 PImage usaMap;
 MapScreen mapScreen;
-PImage topOrigins;
-GraphsScreen graphsScreen;
 public boolean isDropDownSearchExpanded = false; 
 ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
 ArrayList<String> origins = new ArrayList<String>();
@@ -64,21 +61,23 @@ boolean pageChange = false;
 SoundFile backgroundMusic;
 //Table table;
 
+PieChartAnimated pieChart;
+BubbleChartAnimated bubbleChart;
+int chartPage = 0;
+
 
 void setup() {
   frameRate(120);
   pixelDensity(1);
   usaMap = loadImage("usa_map.jpg");
-  topOrigins = loadImage("flights_top_origins.png");
   mapScreen = new MapScreen(usaMap);
   loadAirports("merged_airports.csv");
-  graphsScreen = new GraphsScreen(topOrigins);
   size(1500, 850);
   calibrateMap();
   text = loadFont("AlTarikh-24.vlw");
-  myFont = createFont("Arial Bold", 15);
+  myFont = createFont("Arial Bold", 12);
   textFont(myFont);
-  flights = cr.readCSV("flights2k.csv");
+  flights = cr.readCSV("flights_full.csv");
   
   for (int i = 0; i < flights.size(); i++)
   {
@@ -142,10 +141,15 @@ void setup() {
   destinationsCityName = search.GetDestinationCityNames();
   
   widgetList = new WidgetList();
-  widgetList.add(new Button(10, 205, 140, 45, "TOP ORIGINS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_FREQUENCY_GRAPH));
+  
+  pieChart = new PieChartAnimated();
+  bubbleChart = new BubbleChartAnimated();
+  widgetList.add(new Button(10, 255, 140, 45, "DESTINATION \nPIE CHART",    color(0,100,200), color(0,160,255), color(0,80,160),  EVENT_DEST_PIE));
+  widgetList.add(new Button(10, 305, 140, 45, "DESTINATION \nBUBBLE CHART", color(0,100,200), color(0,160,255), color(0,80,160),  EVENT_DEST_BUBBLE));
+  
   widgetList.add(new Button(10, 105, 140, 45, "RESET DROPDOWN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_RESET_DROP_DOWN));
   widgetList.add(new Button(10, 155, 140, 45, "HOMESCREEN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_GO_HOME_SCREEN));
-  widgetList.add(new Button(10, 255, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
+  widgetList.add(new Button(10, 205, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
   widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
   widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "ORIGIN", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
   widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "ORIGIN\n CITY", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
@@ -181,10 +185,12 @@ void setup() {
        mapScreen.drawMap();
      }
     
-     if (showFrequencyGraph) {
-       graphsScreen.drawTopOrigins();
+     if (chartPage == 1) {
+        pieChart.draw();
+      }
+     if (chartPage == 2) {
+       bubbleChart.draw();
      }
-    
     
      for (Walking w : walkers) {
        w.update();
