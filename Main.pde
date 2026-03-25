@@ -141,7 +141,6 @@ void setup() {
   destinationsCityName = search.GetDestinationCityNames();
   
   widgetList = new WidgetList();
-  widgetList.add(new Button(360, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), SHOW_MAP));
   widgetList.add(new Button(10, 205, 140, 45, "TOP ORIGINS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_FREQUENCY_GRAPH));
   widgetList.add(new Button(10, 105, 140, 45, "RESET DROPDOWN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_RESET_DROP_DOWN));
   widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
