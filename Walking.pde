@@ -1,45 +1,51 @@
 class Walking {
-  Gif walkIn, action, walkOut;
-  float x, y;
-  float targetX;
-  float speed = 3;
-  int state = 0; // 0: Start, 1: Middle, 2: Action, 3: Leaving
+  Gif walkIn, action, walkOut; 
+  float x, y;                 
+  float targetX;              
+  float speed = 8;            
+  int state = 0;              // 0: Off-screen, 1: Walking In, 2: Action, 3: Walking Out
   
-  // FIXED: Added width and height variables
-  float w = 150; 
-  float h = 200;
+  float walkW = 150;          // Default walk width
+  float walkH = 200;          // Default walk height
+  float actionW = 150;        // Default action width
+  float actionH = 200;        // Default action height
   
-  // FIXED: Set to -500 to prevent a double-click trigger right when the app starts
-  long lastClickTime = -500;
+  long lastClickTime = -500;  // Stores time of last click for double-click detection
 
   Walking(PApplet p, float ypos, String walkFile, String actionFile) {
+    // Initialize GIFs
     walkIn = new Gif(p, walkFile);
     action = new Gif(p, actionFile); 
-    action.ignoreRepeat();
+    action.ignoreRepeat();    // makes sure that the action GIF only plays once when clicked
     walkOut = new Gif(p, walkFile); 
     
+    // Start looping for movement animations
     walkIn.loop();
     walkOut.loop();
     
-    reset();
+    reset();                  // Put character in starting position
     y = ypos;
   }
   
-  // FIXED: Added the missing resize method!
-  void resize(float newWidth, float newHeight) {
-    w = newWidth;
-    h = newHeight;
+  // Adjust the character's display size for both walk and action phases
+  void resize(float newWalkW, float newWalkH, float newActionW, float newActionH) {
+    walkW = newWalkW;
+    walkH = newWalkH;
+    actionW = newActionW;
+    actionH = newActionH;
   }
 
- void reset() {
-    x = -300; // Keep them well off-screen
+  // Resets character to the left, off-screen
+  void reset() {
+    x = -400; 
     targetX = x;
-    state = 0; // State 0 now means "Waiting to be summoned"
+    state = 0; 
   }
 
   void handleClick() {
-    long currentTime = millis();
+    long currentTime = millis(); // current time in milliseconds
     
+    // Double-click Logic: If clicked twice, reset the character
     if (currentTime - lastClickTime < 500) {
       reset();
       lastClickTime = 0;
@@ -47,45 +53,63 @@ class Walking {
     } 
     
     if (state == 0) {
-      targetX = width/2 - 50;
+      // If off-screen, move to center of the canvas
+      targetX = width/2 - (walkW/2); 
       state = 1;
-    } else if (state == 1) {
-      action.jump(0); 
-      action.play();  
-      state = 2;
     } else if (state == 2) {
-      targetX = width + 150;
+      // If performing action in center, move to the right off-screen
+      targetX = width + 400;
       state = 3;
     }
     
-    lastClickTime = currentTime;
+    lastClickTime = currentTime; // Update click timer
   }
 
   void update() {
+    // 1. Movement logic (Keep this as is)
     if (abs(x - targetX) > speed) {
       x += (x < targetX) ? speed : -speed;
+    } 
+    else if (state == 1) {
+      action.jump(0); 
+      action.play();  
+      state = 2; 
     }
-    if (state == 1 && (x >= targetX *0.99)) {
-      state++;
+
+    // 2. THE FIX: Increase GIF playback speed manually
+    if (state == 2) {
+      // If the GIF is playing, we "skip" ahead slightly each frame
+      // This effectively multiplies the playback speed.
+      if (action.isPlaying()) {
+        int currentFrame = action.currentFrame();
+        // You can increase this number to make it even faster
+        action.jump(currentFrame + 2); 
+      }
+    }
+    
+    // Once the character is completely off the right side, reset its state
+    if (state == 3 && x > width + 300) {
+      reset();
     }
   }
 
   void display() {
-    // Only draw if the state is NOT 0
+    // Only render if the character is active (state > 0)
     if (state > 0) {
       if (state == 1) {
-        image(walkIn, x, y, w, h);
+        image(walkIn, x, y, walkW, walkH);
       } 
       else if (state == 2) {
-        image(action, x, y, w, h);
+        // Calculate difference in height so the action GIF stays grounded
+        float yOffset = walkH - actionH; 
+        
+        // If the action is wider/narrower, you might also want to center it:
+        float xOffset = (walkW - actionW) / 2;
+        
+        image(action, x + xOffset, y + yOffset, actionW, actionH);
       }
       else if (state == 3) {
-        image(walkOut, x, y, w, h);
-      }
-      
-      // Optional: Auto-reset if they walk off the right side of the screen
-      if (state == 3 && x > width + 100) {
-        reset();
+        image(walkOut, x, y, walkW, walkH);
       }
     }
   }

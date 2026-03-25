@@ -9,9 +9,9 @@ final int SHOW_MAP = 3;
 final int EVENT_CHANGE_PAGE = 4;
 final int EVENT_FREQUENCY_GRAPH = 5;
 final int EVENT_RESET_DROP_DOWN = 6;
+final int EVENT_GO_HOME_SCREEN = 7;
 
-void mousePressed() {
-  showWelcome = false; // boolean to change welcome screen 
+void mousePressed() { 
   boolean dropdownUsedClick = widgetList.handleSearchEvents();
   if (dropdownUsedClick) return;
   Button clicked = widgetList.getEvent(mouseX, mouseY);
@@ -24,6 +24,8 @@ void mousePressed() {
     if (event == EVENT_NONE) {
       
     }
+    else if (event != EVENT_GO_HOME_SCREEN) showWelcome = false; // boolean to change welcome screen
+    if ((event == EVENT_GO_HOME_SCREEN)) showWelcome = true;
     else if (event == EVENT_PRINT_SCREEN) {
       if (!showFlights) {
         showFlights = true;

@@ -1,12 +1,8 @@
-////===================== //<>// //<>//
+////===================== //<>//
 ////==== Main Screen ====
 ////=====================
 
-// TODO here: draw guy walking and looking at secondary screen
-
-// draw guy walking and looking at secondary screen
 import gifAnimation.*;
-// Declarations:
 import java.util.Set;
 import java.util.HashSet;
 import processing.sound.*;
@@ -95,21 +91,22 @@ void setup() {
   
   
 // WALKING ANIMATIONS
-  Walking w1 = new Walking(this, height - 225, "BlueShirtwalk.gif", "guyLook.gif");
-  w1.resize(300, 300);
+  Walking w1 = new Walking(this, height - 280, "bunbun2loop.gif", "pompomturn.gif");
+  w1.resize(120, 280, 480, 265); 
   walkers.add(w1);
   
-  Walking w2 = new Walking(this, height - 220, "guyRun.gif", "guyTurn.gif");
-  w2.resize(300, 300);
+  Walking w2 = new Walking(this, height - 280, "couplewalkop.gif", "handturn.gif");
+  w2.resize(280, 300, 560, 360);
   walkers.add(w2);
   
-  Walking w3 = new Walking(this, height - 150, "girlWalk.gif", "girlTurn.gif");
-  w3.resize(200, 200);
+  Walking w3 = new Walking(this, height - 340, "runnercol.gif", "kidturn.gif");
+  w3.resize(380, 400, 680, 460);
   walkers.add(w3);
-  
-  Walking w4 = new Walking(this, height - 220, "ggWalk.gif", "ggTurn.gif");
-  w4.resize(300, 300);
+    
+  Walking w4 = new Walking(this, height - 380, "walkerstation.gif", "BlueShirtturn.gif");
+  w4.resize(600, 400, 580, 460);
   walkers.add(w4);
+  
   
   // Background and gifs
   bg = loadImage("background1.png");
