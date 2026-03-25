@@ -1,12 +1,8 @@
-////===================== //<>// //<>//
+////===================== //<>//
 ////==== Main Screen ====
 ////=====================
 
-// TODO here: draw guy walking and looking at secondary screen
-
-// draw guy walking and looking at secondary screen
 import gifAnimation.*;
-// Declarations:
 import java.util.Set;
 import java.util.HashSet;
 import processing.sound.*;
