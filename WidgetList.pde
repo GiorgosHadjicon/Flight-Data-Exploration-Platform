@@ -34,7 +34,7 @@ class WidgetList {
 
   Button getEvent(int mx, int my) {
     for (Button w : widgets) {
-      if (w.contains(mx, my)) {
+      if (w.contains(mx, my) && !widgetList.isExpanded()) {
         return w;
       }
     }
@@ -63,9 +63,21 @@ class WidgetList {
     }
   }
   
-  void handleSearchEvents() {
+  boolean handleSearchEvents() {
+    
+    boolean clickUsed = false;
+    
+    if (isExpanded()) {
+      isDropDownSearchExpanded = true;
+    }
+    else {
+      isDropDownSearchExpanded = false;
+    }
     for (dropDownSearch s : widgetsSearch) {
      
+      if (s.contains(mouseX, mouseY)) {
+        clickUsed = true;
+      }
       String selectedValue = s.handleEvent();
       
       if (selectedValue != null && selectedValue != "") {
@@ -117,6 +129,16 @@ class WidgetList {
       testFlights = search.Search(dateDataBlock, "", -1, originDataBlock, originCityName, "", -1, destination, destinationCityName, "", -1, -1, -1, -1, -1, false, false, -1);
       result = new Search_Results(testFlights);
     }
+    return clickUsed;
+  }
+  
+  boolean isExpanded() {
+    for (dropDownSearch s : widgetsSearch) {
+      if (s.expanded) {
+        return true;
+      }
+    }
+    return false;
   }
   
 }
