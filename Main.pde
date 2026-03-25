@@ -58,7 +58,7 @@ void setup() {
   pixelDensity(1);
   usaMap = loadImage("usa_map.jpg");
   mapScreen = new MapScreen(usaMap);
-  size(1500, 850);
+  size(1500, 800);
   text = loadFont("AlTarikh-24.vlw");
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
@@ -73,21 +73,22 @@ void setup() {
   
   
 // WALKING ANIMATIONS
-  Walking w1 = new Walking(this, height - 225, "BlueShirtwalk.gif", "guyLook.gif");
-  w1.resize(300, 300);
+  Walking w1 = new Walking(this, height - 360, "bunbun2loop.gif", "pompomturn.gif");
+  w1.resize(220, 380, 680, 365); 
   walkers.add(w1);
   
-  Walking w2 = new Walking(this, height - 220, "guyRun.gif", "guyTurn.gif");
-  w2.resize(300, 300);
+  Walking w2 = new Walking(this, height - 360, "couplewalkop.gif", "handturn.gif");
+  w2.resize(380, 400, 680, 480);
   walkers.add(w2);
   
-  Walking w3 = new Walking(this, height - 150, "girlWalk.gif", "girlTurn.gif");
-  w3.resize(200, 200);
+  Walking w3 = new Walking(this, height - 340, "runnercol.gif", "kidturn.gif");
+  w3.resize(380, 400, 680, 460);
   walkers.add(w3);
-  
-  Walking w4 = new Walking(this, height - 220, "ggWalk.gif", "ggTurn.gif");
-  w4.resize(300, 300);
+    
+  Walking w4 = new Walking(this, height - 380, "walkerstation.gif", "BlueShirtturn.gif");
+  w4.resize(600, 400, 580, 460);
   walkers.add(w4);
+  
   
   // Background and gifs
   bg = loadImage("background1.png");
