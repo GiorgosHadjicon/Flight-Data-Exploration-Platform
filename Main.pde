@@ -3,18 +3,18 @@
 ////=====================
 
 import gifAnimation.*;
+import processing.video.*;
 import java.util.Set;
 import java.util.HashSet;
 import processing.sound.*;
 import processing.data.Table;
 import processing.data.TableRow;
-
-// For Sreach //<>//
-//background and gifs
+ //<>//
 PImage bg;
 Gif tickerScreen;
 Gif add1;
 Gif add2;
+Movie homeScreenAnimation;
 float westLon = -124.8;
 float eastLon = -66.9;
 float northLat = 49.3;
@@ -79,8 +79,6 @@ void setup() {
   myFont = createFont("Arial Bold", 15);
   textFont(myFont);
   flights = cr.readCSV("flights2k.csv");
-  backgroundMusic = new SoundFile(this, "AirportSound.wav");
-  backgroundMusic.loop();
   
   for (int i = 0; i < flights.size(); i++)
   {
@@ -116,6 +114,12 @@ void setup() {
   add1.loop();
   add2 = new Gif(this, "SatisfatoryGitFinal.gif");
   add2.loop();
+  
+  backgroundMusic = new SoundFile(this, "AirportSound.wav");
+  backgroundMusic.loop();
+  
+  homeScreenAnimation = new Movie(this, "HomeScreenAnimated.mp4");
+  homeScreenAnimation.loop();
   
 //  // Search Test
   search = new Searcher(flights); //<>//
