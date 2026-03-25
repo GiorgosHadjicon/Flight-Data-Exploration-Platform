@@ -44,8 +44,16 @@ void mousePressed() {
       }
     }
     else if (event == EVENT_DISPLAY_SINGLE_FLIGHT) {
- 
+
+    if (clicked.flightIndex >= 0 && clicked.flightIndex < testFlights.size()) {
+  
+      selectedFlight = testFlights.get(clicked.flightIndex);
+  
+      // SEND TO MAP
+      mapScreen.setFlight(selectedFlight);
+      showMap = true;
     }
+  }
     else if (event == SHOW_MAP) {
       if (!showMap) {
         showMap = true;

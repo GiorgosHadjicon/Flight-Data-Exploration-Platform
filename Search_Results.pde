@@ -88,7 +88,9 @@ class Search_Results {
         
         textSize(13);
         if (!buttonsCreated) {
-          widgetList.add( new Button(352, yPos - 10, 780, 20, "", color(180), color(200), color(0, 255, 0), EVENT_DISPLAY_SINGLE_FLIGHT) );
+          Button b = new Button(352, yPos - 10, 780, 20, "", color(180), color(200), color(0, 255, 0), EVENT_DISPLAY_SINGLE_FLIGHT);
+          b.flightIndex = i;   
+          widgetList.add(b);
         }
         text(currentFlight.getDate(), 390, yPos);
         text(currentFlight.getOriginAirport(), 480, yPos);

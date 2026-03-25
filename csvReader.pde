@@ -1,5 +1,4 @@
-import processing.data.Table;
-import processing.data.TableRow;
+
 import java.util.ArrayList;
 
 class csvReader {

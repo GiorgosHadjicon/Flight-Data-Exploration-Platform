@@ -14,6 +14,7 @@ class Button implements Widget
     color pressedColor;
     boolean pressed = false;
     int event;
+    int flightIndex = -1;
     
     Button(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor, int event) {
       this.x = x;
