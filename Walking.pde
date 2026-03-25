@@ -88,7 +88,7 @@ class Walking {
     }
     
     // Once the character is completely off the right side, reset its state
-    if (state == 3 && x > width + 300) {
+    if (state == 3 && x > width + 50) {
       reset();
     }
   }

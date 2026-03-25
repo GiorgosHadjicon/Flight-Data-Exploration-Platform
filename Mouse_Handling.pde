@@ -24,75 +24,109 @@ void mousePressed() {
     if (event == EVENT_NONE) {
       
     }
-    else if (event != EVENT_GO_HOME_SCREEN) showWelcome = false; // boolean to change welcome screen
-    if ((event == EVENT_GO_HOME_SCREEN)) showWelcome = true;
-    else if (event == EVENT_PRINT_SCREEN) {
-      if (!showFlights) {
-        showFlights = true;
-        clicked.pressed = true;
-        if (walkers.get(0).state != 3) {
-          walkers.get(0).handleClick();
-
-        }
-      }
-      else {
-      showFlights = false;
+    
+    //HOMESCREEN BUTTON
+    else if (event == EVENT_GO_HOME_SCREEN) { 
       widgetList.clearFlightsScreen();
-      clicked.pressed = false;
       if (walkers.get(0).state == 2) {
           walkers.get(0).handleClick();
-
-        }
       }
-    }
-    else if (event == EVENT_DISPLAY_SINGLE_FLIGHT) {
-
-    if (clicked.flightIndex >= 0 && clicked.flightIndex < testFlights.size()) {
-  
-      selectedFlight = testFlights.get(clicked.flightIndex);
-  
-      // SEND TO MAP
-      mapScreen.setFlight(selectedFlight);
-      showMap = true;
-    }
-  }
-    else if (event == SHOW_MAP) {
-      if (!showMap) {
-        showMap = true;
-        if (walkers.get(1).state != 3) {
-
+      if (walkers.get(1).state == 2) {
           walkers.get(1).handleClick();
-        }
       }
-      else {
-        showMap = false;
+      showWelcome = true; // boolean to change welcome screen
+      showFlights = false; // boolean to change flight screen
+      showFrequencyGraph = false; // boolean to change graph screen
+      showMap = false; // boolean to change map screen
+    }
+
+    //FLIGHTS BUTTON
+    else if (event == EVENT_PRINT_SCREEN) {
+      if (!showFlights) {
+        if (walkers.get(0).state == 2) {
+            walkers.get(0).handleClick();
+        }
         if (walkers.get(1).state == 2) {
+            walkers.get(1).handleClick();
+        }
+        
+        showWelcome = false; // boolean to change welcome screen
+        showFlights = true; // boolean to change flight screen
+        showFrequencyGraph = false; // boolean to change graph screen
+        showMap = false; // boolean to change map screen
+        
+        if (walkers.get(0).state != 3) {
+          walkers.get(0).handleClick();
+        }
+        else if (walkers.get(1).state != 3) {
           walkers.get(1).handleClick();
-
         }
       }
     }
+      
+  
+        
+    //MAP BUTTON
+    else if (event == EVENT_DISPLAY_SINGLE_FLIGHT) {
+     if (!showMap) {
+      widgetList.clearFlightsScreen();
+      if (walkers.get(0).state == 2) {
+            walkers.get(0).handleClick();
+        }
+      if (walkers.get(1).state == 2) {
+          walkers.get(1).handleClick();
+      }
+      if (clicked.flightIndex >= 0 && clicked.flightIndex < testFlights.size()) {
+    
+        selectedFlight = testFlights.get(clicked.flightIndex);
+    
+        // SEND TO MAP
+        mapScreen.setFlight(selectedFlight);
+        showWelcome = false; // boolean to change welcome screen
+        showFlights = false; // boolean to change flight screen
+        showFrequencyGraph = false; // boolean to change graph screen
+        showMap = true; // boolean to change map screen
+          if (walkers.get(0).state != 3) {
+            walkers.get(0).handleClick();
+          }
+          else if (walkers.get(1).state != 3) {
+            walkers.get(1).handleClick();
+          }
+        }
+     }
+    }
+    
+    //CHANGE PAGE BUTTON
     else if (event == EVENT_CHANGE_PAGE) {
       pageNum = Integer.parseInt(clicked.label);
       pageChange = true;
     }
     
+    //TOP 10 ORIGINS GRAPH BUTTON
     else if (event == EVENT_FREQUENCY_GRAPH) {
       if (!showFrequencyGraph) {
-        showFrequencyGraph = true;
-        if (walkers.get(1).state != 3) {
-
-          walkers.get(1).handleClick();
+        widgetList.clearFlightsScreen();
+        if (walkers.get(0).state == 2) {
+            walkers.get(0).handleClick();
         }
-      }
-      else {
-        showFrequencyGraph = false;
         if (walkers.get(1).state == 2) {
-          walkers.get(1).handleClick();
-
+            walkers.get(1).handleClick();
         }
+        showWelcome = false; // boolean to change welcome screen
+        showFlights = false; // boolean to change flight screen
+        showFrequencyGraph = true; // boolean to change graph screen
+        showMap = false; // boolean to change map screen
+          if (walkers.get(0).state != 3) {
+            walkers.get(0).handleClick();
+          }
+          else if (walkers.get(1).state != 3) {
+            walkers.get(1).handleClick();
+          }
       }
     }
+    
+    
+    //RESET SEARCH BUTTON
     else if (event == EVENT_RESET_DROP_DOWN)
     {
       // Reset all dropdowns visually
