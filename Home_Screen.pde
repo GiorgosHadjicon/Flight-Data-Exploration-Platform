@@ -6,15 +6,9 @@
 class HomeScreen {
   
     void drawWelcomeScreen() {
-      image(homeScreenAnimation, 0, 0, 832, 458);
-      println(homeScreenAnimation.width, homeScreenAnimation.height);
+      image(homeScreenAnimation, 334, 148);
     }
-  
-    // Required callback
-    void movieEvent(Movie m) {
-      println("frame read"); // debug
-      m.read();
-    }
+ 
   
   void drawMainProgram() { //function to display other events will add the corresponding events when created
     background(0);
