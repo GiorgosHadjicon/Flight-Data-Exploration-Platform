@@ -14,7 +14,7 @@ PImage bg;
 Gif tickerScreen;
 Gif add1;
 Gif add2;
-Movie homeScreenAnimation;
+Gif homeScreenAnimation;
 float westLon = -124.8;
 float eastLon = -66.9;
 float northLat = 49.3;
@@ -118,7 +118,7 @@ void setup() {
   backgroundMusic = new SoundFile(this, "AirportSound.wav");
   backgroundMusic.loop();
   
-  homeScreenAnimation = new Movie(this, "HomeScreenAnimated.mp4");
+  homeScreenAnimation = new Gif(this, "HomeScreenAnimated.gif");
   homeScreenAnimation.loop();
   
 //  // Search Test
