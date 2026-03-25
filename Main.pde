@@ -58,7 +58,7 @@ void setup() {
   pixelDensity(1);
   usaMap = loadImage("usa_map.jpg");
   mapScreen = new MapScreen(usaMap);
-  size(1500, 800);
+  size(1500, 850);
   text = loadFont("AlTarikh-24.vlw");
   myFont = createFont("Arial Bold", 20);
   textFont(myFont);
@@ -73,12 +73,12 @@ void setup() {
   
   
 // WALKING ANIMATIONS
-  Walking w1 = new Walking(this, height - 360, "bunbun2loop.gif", "pompomturn.gif");
-  w1.resize(220, 380, 680, 365); 
+  Walking w1 = new Walking(this, height - 280, "bunbun2loop.gif", "pompomturn.gif");
+  w1.resize(120, 280, 480, 265); 
   walkers.add(w1);
   
-  Walking w2 = new Walking(this, height - 360, "couplewalkop.gif", "handturn.gif");
-  w2.resize(380, 400, 680, 480);
+  Walking w2 = new Walking(this, height - 280, "couplewalkop.gif", "handturn.gif");
+  w2.resize(280, 300, 560, 360);
   walkers.add(w2);
   
   Walking w3 = new Walking(this, height - 340, "runnercol.gif", "kidturn.gif");
