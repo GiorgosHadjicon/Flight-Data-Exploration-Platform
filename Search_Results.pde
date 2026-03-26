@@ -79,6 +79,14 @@ class Search_Results {
       widgetList.clearFlights();
       pageChange = false;
     }
+    
+    if (flightsFiltered.size() == 0) {
+      pushStyle();
+      textSize(25);
+      text("NO FLIGHTS FOUND", 749, 376);
+      popStyle();
+    }
+    
     for (int i = iSet; i < flightsFiltered.size(); i++) {
       Flight currentFlight = flightsFiltered.get(i);
       if (yIncrement <= 11) {
