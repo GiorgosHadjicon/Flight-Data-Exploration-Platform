@@ -1,15 +1,6 @@
 //====================
 // Drawing Map Screen (one off object)
 //====================
-void calibrateMap() {
-
-  mapLeft = 90;          // Seattle X
-  mapTop = 120;          // Seattle Y
-
-  mapRight = width - 90; // Miami X
-  mapBottom = height - 50; // Miami Y
-}
-
 class MapScreen {
   PImage usaMap;
   Flight currentFlight = null;
@@ -71,12 +62,7 @@ void setFlight(Flight f) {
 
   float x2 = mapLon(a2.lon);
   float y2 = mapLat(a2.lat);
-  
-  x1 = constrain(x1, 80, width-80);
-  x2 = constrain(x2, 80, width-80);
-  
-  y1 = constrain(y1, 100, height-40);
-  y2 = constrain(y2, 100, height-40);
+ 
     
   fill(0,255,120);
   ellipse(x1, y1, 8, 8);
@@ -87,11 +73,14 @@ void setFlight(Flight f) {
   float curveHeight = constrain(dist * 0.25, 40, 180);
   
   float cx = (x1 + x2) / 2.0;
-  float cy = min(y1, y2) - curveHeight;
+  float cy = (y1 + y2) / 2.0 - curveHeight;
+  cy = constrain(cy, mapTop + 10, mapBottom - 10);
   
-  // Prevent curve going off top of map
-  float mapTop = 80;
-  cy = max(cy, mapTop + 40);
+  x1 = constrain(x1, mapLeft, mapRight);
+  y1 = constrain(y1, mapTop, mapBottom);
+  
+  x2 = constrain(x2, mapLeft, mapRight);
+  y2 = constrain(y2, mapTop, mapBottom);
 
   // DRAW CURVE
   stroke(0, 255, 120);
@@ -139,6 +128,9 @@ if (flightFinished) {
   
   float px = bezierPoint(x1, cx, cx, x2, planeT);
   float py = bezierPoint(y1, cy, cy, y2, planeT);
+  
+  px = constrain(px, mapLeft, mapRight);
+  py = constrain(py, mapTop, mapBottom);
   
   float dx = bezierTangent(x1, cx, cx, x2, planeT);
   float dy = bezierTangent(y1, cy, cy, y2, planeT);
