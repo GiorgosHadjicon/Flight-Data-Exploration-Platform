@@ -13,6 +13,13 @@ final int EVENT_DEST_BUBBLE = 7;
 final int EVENT_GO_HOME_SCREEN = 8;
 
 void mousePressed() { 
+  if (tutorialActive && tutorialStep == 1) {
+    // If user clicks near search bar while in tutorial
+    if (mouseY >= 55 && mouseY <= 95) {
+        tutorialStep = 2;
+        tutorialActive = false; // tutorial finished
+      }
+  }
   boolean dropdownUsedClick = widgetList.handleSearchEvents();
   if (dropdownUsedClick) return;
   Button clicked = widgetList.getEvent(mouseX, mouseY);
@@ -45,6 +52,9 @@ void mousePressed() {
 
     //FLIGHTS BUTTON
     else if (event == EVENT_PRINT_SCREEN) {
+      if (tutorialActive && tutorialStep == 0) {
+        tutorialStep = 1; // move to next step in tutorial
+      }
       if (!showFlights) {
         if (walkers.get(0).state == 2) {
             walkers.get(0).handleClick();

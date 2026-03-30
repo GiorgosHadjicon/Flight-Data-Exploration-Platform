@@ -65,6 +65,9 @@ PieChartAnimated pieChart;
 BubbleChartAnimated bubbleChart;
 int chartPage = 0;
 
+// For tutorial
+boolean tutorialActive = true;
+int tutorialStep = 0; // 0 = highlight flights button, 1 = highlight search bar, 2 = done
 
 void setup() {
   frameRate(120);
@@ -195,4 +198,8 @@ void setup() {
        w.update();
        w.display();
      }
+     
+     if (tutorialActive) {
+     drawTutorialOverlay();
+}
    }
