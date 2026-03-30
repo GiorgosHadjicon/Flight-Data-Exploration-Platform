@@ -46,11 +46,11 @@ HomeScreen homeScreen = new HomeScreen();
 PImage usaMap;
 MapScreen mapScreen;
 public boolean isDropDownSearchExpanded = false; 
-ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
-ArrayList<String> origins = new ArrayList<String>();
-ArrayList<String> originsCityName = new ArrayList<String>();
-ArrayList<String> destinations = new ArrayList<String>();
-ArrayList<String> destinationsCityName = new ArrayList<String>();
+public ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
+public ArrayList<String> origins = new ArrayList<String>();
+public ArrayList<String> originsCityName = new ArrayList<String>();
+public ArrayList<String> destinations = new ArrayList<String>();
+public ArrayList<String> destinationsCityName = new ArrayList<String>();
 String dateDataBlock = "1/1/2022";
 String originDataBlock = "";
 String originCityName = "";
@@ -124,7 +124,7 @@ void setup() {
   
 //  // Search Test
   search = new Searcher(flights); //<>//
-  testFlights = search.Search("1/1/2022", "", -1, "JFK", "New York, NY", "", -1, "LAX", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
+  testFlights = search.Search("1/1/2022", "", -1, "", "", "", -1, "", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
   for (Flight i : testFlights) {
     System.out.print(i.flightDateString + " ");
     System.out.print(i.origin + " ");
@@ -152,11 +152,7 @@ void setup() {
   widgetList.add(new Button(10, 105, 140, 45, "RESET DROPDOWN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_RESET_DROP_DOWN));
   widgetList.add(new Button(10, 155, 140, 45, "HOMESCREEN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_GO_HOME_SCREEN));
   widgetList.add(new Button(10, 205, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
-  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
-  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "ORIGIN", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
-  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "ORIGIN\n CITY", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
-  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "DESTIN", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
-  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "DESTIN\n CITY", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
+
 }
 
   void draw(){

@@ -29,6 +29,7 @@ class Button implements Widget
     }
     
     void display() {
+      pushStyle();
       color currentColor;
       int offsetX = 0;
       int offsetY = 0;  // for indent effect
@@ -74,6 +75,7 @@ class Button implements Widget
       textAlign(CENTER, CENTER);
       textFont(myFont);
       text(label, x + w/2 + offsetX, y + h/2 + offsetY);
+      popStyle();
     }
     
     boolean contains(int mx, int my) 

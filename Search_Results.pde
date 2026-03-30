@@ -33,19 +33,22 @@ class Search_Results {
     fill(255);
     rect(332, 145, 834, 463);
     
+    textAlign(CENTER, CENTER);
+    
     widgetList.displayWidgets();
     int yIncrement = 0;
     
     // Creates buttons for choosing date, origin, destination, departure time, and arrival time
     if (!buttonsCreated) {
       textSize(13);
-      widgetList.add( new Button(352, 170, 70, 40, "Date", color(180), color(120), color(0, 255, 0) , EVENT_NONE) );
-      widgetList.add( new Button(442, 170, 80, 40, "Origin", color(180), color(120), color(0, 255, 0) , EVENT_NONE) );
-      widgetList.add( new Button(542, 170, 120, 40, "Origin City", color(180), color(120), color(0, 255, 0), EVENT_NONE) );
-      widgetList.add( new Button(682, 170, 125, 40, "Destination", color(180), color(120), color(0, 255, 0), EVENT_NONE) );
-      widgetList.add( new Button(827, 170, 165, 40, "Destination City", color(180), color(120), color(0, 255, 0),EVENT_NONE) );
+
       widgetList.add( new Button(1012, 170, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0), EVENT_NONE) );
       widgetList.add( new Button(1082, 170, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0), EVENT_NONE) );
+      widgetList.addDrop(new dropDownSearch(352, 170, 70, 40, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
+      widgetList.addDrop(new dropDownSearch(442, 170, 80, 40, "ORIGIN", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
+      widgetList.addDrop(new dropDownSearch(542, 170, 120, 40, "ORIGIN CITY", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
+      widgetList.addDrop(new dropDownSearch(682, 170, 125, 40, "DESTINATION", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
+      widgetList.addDrop(new dropDownSearch(827, 170, 165, 40, "DESTINATION CITY", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
       
       
      // Limits the number of flights shown in the screen and counts the number of pages it has
@@ -64,16 +67,6 @@ class Search_Results {
       }
     }
         
-      for (int i = 1; i <= totalCountPages; i++) {
-        if (totalCountPages >= 9) {
-          if (i <= 8) {
-            widgetList.add( new Button(630 + (i * 25), 550, 20, 20, String.valueOf(i), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
-          }
-        }
-        else {
-          widgetList.add( new Button(670 + (i * 25), 550, 20, 20, String.valueOf(i), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
-        }
-      }    
 
     if (pageChange) {
       widgetList.clearFlights();
@@ -82,6 +75,8 @@ class Search_Results {
     
     if (flightsFiltered.size() == 0) {
       pushStyle();
+      fill(0);
+      textAlign(CENTER, CENTER);
       textSize(25);
       text("NO FLIGHTS FOUND", 749, 376);
       popStyle();
@@ -99,6 +94,17 @@ class Search_Results {
           Button b = new Button(352, yPos - 10, 780, 20, "", color(180), color(200), color(0, 255, 0), EVENT_DISPLAY_SINGLE_FLIGHT);
           b.flightIndex = i;   
           widgetList.add(b);
+          for (int j = 1; j <= totalCountPages; j++) {
+            if (totalCountPages >= 9) {
+              if (j <= 8) {
+                widgetList.add( new Button(630 + (j * 25), 550, 20, 20, String.valueOf(j), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
+              }
+            }
+            else {
+              widgetList.add( new Button(670 + (j * 25), 550, 20, 20, String.valueOf(j), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
+            }
+          }    
+
         }
         text(currentFlight.getDate(), 390, yPos);
         text(currentFlight.getOriginAirport(), 480, yPos);
@@ -109,7 +115,12 @@ class Search_Results {
         text(currentFlight.getArrivalTime(), 1108, yPos);
       }        
     }
+    for (dropDownSearch s: widgetsSearch) {
+      s.display();
+      
+    }
     buttonsCreated = true;
+    print(widgetList.widgets.size() + "\n");
     
   }
  

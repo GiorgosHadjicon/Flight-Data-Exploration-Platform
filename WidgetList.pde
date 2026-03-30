@@ -26,10 +26,6 @@ class WidgetList {
       w.display();
     }
     
-    for (dropDownSearch s: widgetsSearch) {
-      s.display();
-      
-    }
   }
 
   Button getEvent(int mx, int my) {
@@ -60,6 +56,9 @@ class WidgetList {
       if (widgets.get(i).getEvent() == EVENT_DISPLAY_SINGLE_FLIGHT || widgets.get(i).getEvent() == EVENT_NONE || widgets.get(i).getEvent() == EVENT_CHANGE_PAGE) {
         widgets.remove(i);
       }
+    }
+    for (int i = widgetsSearch.size() - 1; i >= 0; i--) {
+      widgetsSearch.remove(i);
     }
   }
   
