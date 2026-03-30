@@ -8,7 +8,7 @@ void drawTutorialOverlay() {
   fill(0, 180);
   noStroke();
 
-  float pulse = 4 * sin(frameCount * 0.07);
+  float pulse = 2 + 4 * sin(frameCount * 0.07);
 
   if (tutorialStep == 0) {
     // FLIGHTS BUTTON COORDINATES
@@ -32,14 +32,14 @@ void drawTutorialOverlay() {
 
   else if (tutorialStep == 1) {
     // SEARCH BAR COORDINATES
-    int x = 10;
-    int y = 55;
-    int w = 350;
-    int h = 35;
+    int x = 335;
+    int y = 165;
+    int w = 665;
+    int h = 50;
 
     int padding = 5;
 
-    // Darken everything except padded search bar
+    // Darken everything except search bar
     rect(0, 0, width, y - padding);
     rect(0, y + h + padding, width, height - (y + h + padding));
     rect(0, y - padding, x - padding, h + padding * 2);
@@ -67,7 +67,7 @@ void drawTutorialOverlay() {
     text("Click to view flights", width/3, height/3 - 50);
   } 
   else if (tutorialStep == 1) {
-    text("Now use the search bar", width/3, height/3 - 50);
+    text("Now use the search bar", width/2, height/2);
   }
 
   popStyle();

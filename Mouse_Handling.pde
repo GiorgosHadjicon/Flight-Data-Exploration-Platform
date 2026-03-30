@@ -15,7 +15,7 @@ final int EVENT_GO_HOME_SCREEN = 8;
 void mousePressed() { 
   if (tutorialActive && tutorialStep == 1) {
     // If user clicks near search bar while in tutorial
-    if (mouseY >= 55 && mouseY <= 95) {
+    if (mouseY >= 150 && mouseY <= 230) {
         tutorialStep = 2;
         tutorialActive = false; // tutorial finished
       }
