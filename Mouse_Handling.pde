@@ -48,6 +48,7 @@ void mousePressed() {
       pieChart.reset();
       bubbleChart.reset();
       showMap = false; // boolean to change map screen
+      
     }
 
     //FLIGHTS BUTTON
@@ -69,7 +70,7 @@ void mousePressed() {
         pieChart.reset();
         bubbleChart.reset();
         showMap = false; // boolean to change map screen
-        
+        searchButtonsCreated = false;
         if (walkers.get(0).state != 3) {
           walkers.get(0).handleClick();
         }
@@ -173,6 +174,7 @@ void mousePressed() {
     //RESET SEARCH BUTTON
     else if (event == EVENT_RESET_DROP_DOWN)
     {
+      pageNum = 1;
       // Reset all dropdowns visually
       for (dropDownSearch s: widgetsSearch) 
       {

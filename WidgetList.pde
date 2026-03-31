@@ -53,7 +53,7 @@ class WidgetList {
 }
   void clearFlightsScreen() {
     for (int i = widgets.size() - 1; i >= 0; i--) {
-      if (widgets.get(i).getEvent() == EVENT_DISPLAY_SINGLE_FLIGHT || widgets.get(i).getEvent() == EVENT_NONE || widgets.get(i).getEvent() == EVENT_CHANGE_PAGE) {
+      if (widgets.get(i).getEvent() == EVENT_DISPLAY_SINGLE_FLIGHT || widgets.get(i).getEvent() == EVENT_NONE || widgets.get(i).getEvent() == EVENT_CHANGE_PAGE || widgets.get(i).getEvent() == EVENT_RESET_DROP_DOWN) {
         widgets.remove(i);
       }
     }

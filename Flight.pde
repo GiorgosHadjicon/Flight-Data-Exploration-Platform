@@ -66,6 +66,17 @@ class Flight {
   String getOriginCityName() {
     String data = "";
     data += originCityName;
+    if(data.length() > 25) {
+      String [] result = data.split("/");
+      for (int i = 1; i < result.length; i++ ){
+        if (i != 1) {
+          data += "/" + result[i];
+        }
+        else {
+          data = result[i];
+        }
+      }
+    }
     return data;
   }
   
