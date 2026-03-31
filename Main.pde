@@ -11,7 +11,7 @@ import processing.data.Table;
 import processing.data.TableRow;
  //<>//
 PImage bg;
-Gif tickerScreen;
+Gif weather;
 Gif add1;
 Gif add2;
 Gif homeScreenAnimation;
@@ -109,8 +109,8 @@ void setup() {
   
   // Background and gifs
   bg = loadImage("background1.png");
-  tickerScreen = new Gif(this, "gifscreen.gif");
-  tickerScreen.loop(); // plays continuously
+  weather = new Gif(this, "weather.gif");
+  weather.loop(); // plays continuously
   add1 = new Gif(this, "addV1.gif");
   add1.loop();
   add2 = new Gif(this, "SatisfatoryGitFinal.gif");
@@ -159,7 +159,7 @@ void setup() {
     //print(isDropDownSearchExpanded); //<>//
       // Fraw Background and gifs
       image(bg, 0, 0);
-      image(tickerScreen, 640, 10, 780, 110);
+      image(weather, 0, 0);
       image(add1, 1044, 179);
       image(add2, 1075, 515);
       fill(0);
