@@ -40,16 +40,17 @@ class Search_Results {
     
     // Creates buttons for choosing date, origin, destination, departure time, and arrival time
     if (!searchButtonsCreated) {
-      textSize(13);
+      textSize(15);
 
-      widgetList.add( new Button(1012, 170, 50, 40, "Dep.", color(180), color(120), color(0, 255, 0), EVENT_NONE, false) );
-      widgetList.add( new Button(1082, 170, 50, 40, "Arr.", color(180), color(120), color(0, 255, 0), EVENT_NONE, false) );
-      widgetList.addDrop(new dropDownSearch(352, 170, 70, 40, "DATE", color(255, 0, 0), color(0, 150, 0), date, "date")); 
-      widgetList.addDrop(new dropDownSearch(442, 170, 80, 40, "ORIGIN", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
-      widgetList.addDrop(new dropDownSearch(542, 170, 120, 40, "ORIGIN CITY", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
-      widgetList.addDrop(new dropDownSearch(682, 170, 125, 40, "DESTINATION", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
-      widgetList.addDrop(new dropDownSearch(827, 170, 165, 40, "DESTINATION CITY", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
-      print(widgetsSearch.size());
+      widgetList.add( new Button(1012, 170, 50, 40, "Dep.", color(250), color(120), color(0, 255, 0), EVENT_NONE, false) );
+      widgetList.add( new Button(1082, 170, 50, 40, "Arr.", color(250), color(120), color(0, 255, 0), EVENT_NONE, false) );
+      widgetList.addDrop(new dropDownSearch(352, 170, 70, 40, "DATE", color(250), color(200), date, "date")); 
+      widgetList.addDrop(new dropDownSearch(447, 170, 120, 40, "ORIGIN CITY", color(250), color(200), originsCityName, "originsCityName")); 
+      widgetList.addDrop(new dropDownSearch(592, 170, 90, 40, "AIRPORT", color(250), color(200), origins, "origins")); 
+      widgetList.addDrop(new dropDownSearch(707, 170, 165, 40, "DESTINATION CITY", color(250), color(200), destinationsCityName, "destinationsCityName")); 
+      widgetList.addDrop(new dropDownSearch(897, 170, 90, 40, "AIRPORT", color(250), color(200), destinations, "destinations")); 
+
+      widgetList.add(new Button(360, 555, 90, 30, "CLEAR",   color(120, 200, 150), color(190, 95, 95), color(170, 80, 80), EVENT_RESET_DROP_DOWN));
       searchButtonsCreated = true;
     }
       
@@ -118,11 +119,13 @@ class Search_Results {
           }    
 
         }
-        text(currentFlight.getDate(), 390, yPos);
-        text(currentFlight.getOriginAirport(), 480, yPos);
-        text(currentFlight.getOriginCityName(), 605, yPos);
-        text(currentFlight.getDestinationAirport(), 740, yPos);
-        text(currentFlight.getDestinationCityName(), 910, yPos);
+        text(currentFlight.getDate(), 390, yPos);      
+        
+        text(currentFlight.getOriginCityName(), 510, yPos);
+        text(currentFlight.getOriginAirport(), 635, yPos);
+        text(currentFlight.getDestinationCityName(), 800, yPos);
+        text(currentFlight.getDestinationAirport(), 940, yPos);
+        
         text(currentFlight.getDepartureTime(), 1038, yPos);
         text(currentFlight.getArrivalTime(), 1108, yPos);
       }        

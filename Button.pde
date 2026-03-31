@@ -77,6 +77,18 @@ class Button implements Widget
         strokeColor = color(0); 
       }
       
+      strokeColor = color(255);
+      
+      if (!this.isPressable || this.event == EVENT_RESET_DROP_DOWN || this.event == EVENT_CHANGE_PAGE) {
+        strokeColor = color(0);
+        strokeWeightValue = 1;
+        if ( this.event == EVENT_RESET_DROP_DOWN) {
+          strokeColor = color(150, 70, 70);
+        }
+        if ( this.event == EVENT_CHANGE_PAGE) {
+          strokeWeightValue = 0; 
+        }
+      }
       stroke(strokeColor);
       strokeWeight(strokeWeightValue);
       fill(currentColor);
@@ -86,6 +98,7 @@ class Button implements Widget
       
 
       fill(0);
+      textSize(15);
       textAlign(CENTER, CENTER);
       textFont(myFont);
       text(label, x + w/2 + offsetX, y + h/2 + offsetY);

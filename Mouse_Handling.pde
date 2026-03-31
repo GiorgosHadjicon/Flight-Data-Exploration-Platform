@@ -174,6 +174,7 @@ void mousePressed() {
     //RESET SEARCH BUTTON
     else if (event == EVENT_RESET_DROP_DOWN)
     {
+      pageNum = 1;
       // Reset all dropdowns visually
       for (dropDownSearch s: widgetsSearch) 
       {

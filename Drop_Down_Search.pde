@@ -60,15 +60,15 @@ class dropDownSearch implements Widget
     
     if (contains(mouseX, mouseY) && !expanded) fill(hoverColor);
     else fill(expanded ? color(220, 220, 255) : buttonColor);
-    stroke(50);
-    strokeWeight(1.5);
-    rect(x, y, w, h, 6);
+    stroke(0);
+    strokeWeight(1);
+    rect(x, y, w, h);
     
     // --- Draw button text ---
     fill(0);
     textAlign(LEFT, CENTER);
     textFont(myFont);
-    textSize(10);
+    textSize(15);
     
     
     if (expanded) {
@@ -130,8 +130,16 @@ class dropDownSearch implements Widget
     if (itemName.equals("originsCityName") || itemName.equals("destinationsCityName"))
     {
       textSize(10);
-      while (s.length() > 5) {
-        s = s.substring(s.length()-2, s.length());
+      if (s.length() > 20) {
+        String [] result = s.split("/");
+        for (int i = 1; i < result.length; i++ ){
+          if (i != 1) {
+            s += "/" + result[i];
+          }
+          else {
+            s = result[i];
+          }
+        }
       }
       return s;
     }
