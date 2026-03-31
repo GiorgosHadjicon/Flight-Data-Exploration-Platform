@@ -194,7 +194,7 @@ void mousePressed() {
     }
   }
 }
-void mouseReleased() {
-  widgetList.releaseAll();  
-}
+//void mouseReleased() {
+//  widgetList.releaseAll();  
+//}
 // mouse hover ect...

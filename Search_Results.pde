@@ -50,7 +50,7 @@ class Search_Results {
       widgetList.addDrop(new dropDownSearch(707, 170, 165, 40, "DESTINATION CITY", color(250), color(200), destinationsCityName, "destinationsCityName")); 
       widgetList.addDrop(new dropDownSearch(897, 170, 90, 40, "AIRPORT", color(250), color(200), destinations, "destinations")); 
 
-      widgetList.add(new Button(360, 555, 90, 30, "CLEAR",   color(120, 200, 150), color(190, 95, 95), color(170, 80, 80), EVENT_RESET_DROP_DOWN));
+      widgetList.add(new Button(360, 555, 90, 30, "CLEAR",   color(255), color(255, 235, 235), color(255, 235, 235), EVENT_RESET_DROP_DOWN));
       searchButtonsCreated = true;
     }
       
@@ -110,11 +110,11 @@ class Search_Results {
           for (int j = 1; j <= totalCountPages; j++) {
             if (totalCountPages >= 9) {
               if (j <= 8) {
-                widgetList.add( new Button(630 + (j * 25), 550, 20, 20, String.valueOf(j), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
+                widgetList.add( new Button(610 + (j * 30), 550, 25, 25, String.valueOf(j), color(245, 247, 250), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
               }
             }
             else {
-              widgetList.add( new Button(670 + (j * 25), 550, 20, 20, String.valueOf(j), color(180), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
+              widgetList.add( new Button(610 + (j * 30), 550, 25, 25, String.valueOf(j), color(245, 247, 250), color(120), color(0, 255, 0) , EVENT_CHANGE_PAGE) );
             }
           }    
 

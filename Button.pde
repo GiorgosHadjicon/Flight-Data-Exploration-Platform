@@ -16,6 +16,7 @@ class Button implements Widget
     int event;
     int flightIndex = -1;
     boolean isPressable = true;
+    int curved = 0;
     
     Button(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor, int event) {
       this.x = x;
@@ -76,28 +77,44 @@ class Button implements Widget
         strokeWeightValue = 0;
         strokeColor = color(0); 
       }
-      
       strokeColor = color(255);
       
       if (!this.isPressable || this.event == EVENT_RESET_DROP_DOWN || this.event == EVENT_CHANGE_PAGE) {
         strokeColor = color(0);
         strokeWeightValue = 1;
         if ( this.event == EVENT_RESET_DROP_DOWN) {
-          strokeColor = color(150, 70, 70);
+          strokeColor = color(200, 90, 90);
+          curved = 5;
         }
         if ( this.event == EVENT_CHANGE_PAGE) {
-          strokeWeightValue = 0; 
+          strokeWeightValue = 1; 
+          strokeColor = color(210, 215, 223);
+          curved = 8;
         }
       }
+      
+      if (event == EVENT_CHANGE_PAGE && Integer.parseInt(label) == pageNum) {
+        currentColor = color(70, 130, 180);
+        strokeColor = color(70, 130, 180);
+      }
+      
       stroke(strokeColor);
       strokeWeight(strokeWeightValue);
       fill(currentColor);
-      rect(x+offsetX, y+offsetY, w, h);
+      rect(x+offsetX, y+offsetY, w, h, curved);
       
         
-      
+      if ( this.event == EVENT_RESET_DROP_DOWN) {
+          fill(200, 90, 90);
+      }
+      else if (event == EVENT_CHANGE_PAGE && Integer.parseInt(label) == pageNum) {
+        fill(255);
+      }
+      else {
+        fill(0);
+      }
 
-      fill(0);
+      
       textSize(15);
       textAlign(CENTER, CENTER);
       textFont(myFont);
