@@ -48,6 +48,7 @@ void mousePressed() {
       pieChart.reset();
       bubbleChart.reset();
       showMap = false; // boolean to change map screen
+      
     }
 
     //FLIGHTS BUTTON
@@ -69,7 +70,7 @@ void mousePressed() {
         pieChart.reset();
         bubbleChart.reset();
         showMap = false; // boolean to change map screen
-        
+        searchButtonsCreated = false;
         if (walkers.get(0).state != 3) {
           walkers.get(0).handleClick();
         }

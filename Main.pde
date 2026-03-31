@@ -26,6 +26,7 @@ float mapBottom = 608;
 HashMap<String, Airport> airportMap = new HashMap<String, Airport>();
 Flight selectedFlight = null;
 Boolean typing = false;
+public boolean searchButtonsCreated = false;
 String currentSearchString = "";
 Searcher search;
 ArrayList<Flight> testFlights;
@@ -199,3 +200,4 @@ void setup() {
      drawTutorialOverlay();
 }
    }
+   
