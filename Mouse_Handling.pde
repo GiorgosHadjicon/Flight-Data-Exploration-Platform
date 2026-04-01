@@ -47,6 +47,7 @@ void mousePressed() {
       showWelcome = true; // boolean to change welcome screen
       showFlights = false; // boolean to change flight screen  
       showMap = false; // boolean to change map screen
+      showChartDash = false;
       
     }
 
@@ -67,6 +68,7 @@ void mousePressed() {
         showFlights = true; // boolean to change flight screen
         showMap = false; // boolean to change map screen
         searchButtonsCreated = false;
+        showChartDash = false;
         if (walkers.get(0).state != 3) {
           walkers.get(0).handleClick();
         }
@@ -97,6 +99,7 @@ void mousePressed() {
         showWelcome = false; // boolean to change welcome screen
         showFlights = false; // boolean to change flight screen
         showMap = true; // boolean to change map screen
+        showChartDash = false;
           if (walkers.get(0).state != 3) {
             walkers.get(0).handleClick();
           }
@@ -115,7 +118,7 @@ void mousePressed() {
     
     //GRAPHS BUTTON
     else if (event == EVENT_CHART_DASH) {
-        showChartDash = !showChartDash;
+        
         widgetList.clearFlightsScreen();
         if (walkers.get(0).state == 2) {
             walkers.get(0).handleClick();
@@ -123,6 +126,7 @@ void mousePressed() {
         if (walkers.get(1).state == 2) {
             walkers.get(1).handleClick();
         }
+        showChartDash = true;
         showWelcome = false; // boolean to change welcome screen
         showFlights = false; // boolean to change flight screen
         showMap = false; // boolean to change map screen
