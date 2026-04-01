@@ -41,6 +41,7 @@ class dropDownSearch implements Widget
     expanded = false;
     isDropDownSearchExpanded = false;
     filteredItems = new ArrayList<String>(items);
+    showChartDash = false;
   }
   
   // Rebuilds filteredItems to only show items containing the search text
