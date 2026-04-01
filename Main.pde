@@ -14,7 +14,7 @@ PImage bg;
 Gif weather;
 Gif add1;
 Gif add2;
-Gif homeScreenAnimation;
+Movie homeScreenVideo; // Declaring the Movie object
 float westLon = -127;
 float eastLon = -58;
 float northLat = 59;
@@ -120,8 +120,9 @@ void setup() {
   backgroundMusic = new SoundFile(this, "AirportSound.wav");
   backgroundMusic.loop();
   
-  homeScreenAnimation = new Gif(this, "HomeScreenAnimated.gif");
-  homeScreenAnimation.loop();
+  homeScreenVideo = new Movie(this, "AirPlaneFly.mov"); 
+  homeScreenVideo.loop(); 
+  homeScreenVideo.volume(0); // <--- THIS MUTES THE VIDEO
   
 //  // Search Test
   search = new Searcher(flights); //<>//
@@ -153,6 +154,9 @@ void setup() {
   widgetList.add(new Button(10, 155, 140, 45, "HOMESCREEN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_GO_HOME_SCREEN));
   widgetList.add(new Button(10, 205, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
 
+}
+  void movieEvent(Movie m) {
+  m.read();
 }
 
   void draw(){
