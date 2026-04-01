@@ -16,7 +16,12 @@ class Button implements Widget
     int event;
     int flightIndex = -1;
     boolean isPressable = true;
+    int curved = 0;
     
+    
+// Constructor of button 
+// Creates a rectangular button, with an integer passed as a parameter which acts as a unique identifier of its purpose
+
     Button(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor, int event) {
       this.x = x;
       this.y = y;
@@ -29,6 +34,8 @@ class Button implements Widget
       this.event = event;
     }
     
+// Constructor of button 
+// One extra Parameter to check if button is pressable
     Button(int x, int y, int w, int h, String label, color buttonColor, color hoverColor, color pressedColor, int event, boolean isPressable) {
       this.x = x;
       this.y = y;
@@ -64,8 +71,14 @@ class Button implements Widget
         stroke(10);
         offsetX=0;
         offsetY=0;
-        strokeWeightValue = 0;
-        strokeColor = color(255, 255, 255); // white stroke when pressed
+        if (event == EVENT_DISPLAY_SINGLE_FLIGHT ) {
+          strokeColor = color(70, 130, 180);
+          strokeWeightValue = 1;
+        }
+        else {
+          strokeWeightValue = 0;
+          strokeColor = color(255);
+        }
       }
       else
       {
@@ -73,31 +86,58 @@ class Button implements Widget
         stroke(0);
         offsetX=0;
         offsetY=0;
-        strokeWeightValue = 0;
-        strokeColor = color(0); 
+        if (event == EVENT_DISPLAY_SINGLE_FLIGHT ) {
+          strokeColor = color(230, 233, 237); 
+          strokeWeightValue = 1;
+        }
+        else {
+          strokeWeightValue = 0;
+          strokeColor = color(255);
+        }
       }
       
-      strokeColor = color(255);
+   
       
       if (!this.isPressable || this.event == EVENT_RESET_DROP_DOWN || this.event == EVENT_CHANGE_PAGE) {
         strokeColor = color(0);
         strokeWeightValue = 1;
         if ( this.event == EVENT_RESET_DROP_DOWN) {
-          strokeColor = color(150, 70, 70);
+          strokeColor = color(200, 90, 90);
+          curved = 5;
         }
         if ( this.event == EVENT_CHANGE_PAGE) {
-          strokeWeightValue = 0; 
+          strokeWeightValue = 1; 
+          strokeColor = color(210, 215, 223);
+          curved = 8;
         }
       }
+      
+      if (event == EVENT_CHANGE_PAGE && Integer.parseInt(label) == pageNum) {
+        currentColor = color(70, 130, 180);
+        strokeColor = color(70, 130, 180);
+      }
+      
+      if (event == EVENT_NONE) {
+        strokeColor = color(185, 190, 195);
+      }
+      
       stroke(strokeColor);
       strokeWeight(strokeWeightValue);
       fill(currentColor);
-      rect(x+offsetX, y+offsetY, w, h);
+      rect(x+offsetX, y+offsetY, w, h, curved);
       
         
-      
+      if ( this.event == EVENT_RESET_DROP_DOWN) {
+          fill(200, 90, 90);
+      }
+      else if (event == EVENT_CHANGE_PAGE && Integer.parseInt(label) == pageNum) {
+        fill(255);
+      }
+      else {
+        fill(0);
+      }
 
-      fill(0);
+      
       textSize(15);
       textAlign(CENTER, CENTER);
       textFont(myFont);

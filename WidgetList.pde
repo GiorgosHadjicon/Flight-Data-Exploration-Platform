@@ -30,7 +30,7 @@ class WidgetList {
 
   Button getEvent(int mx, int my) {
     for (Button w : widgets) {
-      if (w.contains(mx, my) && !widgetList.isExpanded()) {
+      if (w.contains(mx, my) && !widgetList.isExpanded() && w.isPressable) {
         return w;
       }
     }
