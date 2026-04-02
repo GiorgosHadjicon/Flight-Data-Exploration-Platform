@@ -168,7 +168,6 @@ class Searcher {
      return commonFlights;   
    }
    
-   // Todo add sorting!!!!!!!!!!!!!!!!!!!!!!!!!!
    ArrayList<String> GetDates(){
      return new ArrayList<String>(flightDateStrings.keySet());
    }
