@@ -142,37 +142,46 @@ if (flightFinished) {
 
 
     // DRAW PLANE
-  void drawPlane(float x, float y, float angle, float scaleAmt, int c) {
-    pushMatrix();
-    translate(x, y);
-    rotate(angle);
-    scale(scaleAmt);
-  
-    fill(c);
-    noStroke();
-  
-    // simple plane silhouette
-    beginShape();
-    vertex(18, 0);    // nose
-    vertex(6, -4);
-    vertex(2, -12);   // top wing front
-    vertex(-2, -12);
-    vertex(-5, -4);
-    vertex(-14, -4);
-    vertex(-18, -10); // tail top
-    vertex(-21, -10);
-    vertex(-18, 0);
-    vertex(-21, 10);  // tail bottom
-    vertex(-18, 10);
-    vertex(-14, 4);
-    vertex(-5, 4);
-    vertex(-2, 12);   // bottom wing front
-    vertex(2, 12);
-    vertex(6, 4);
-    endShape(CLOSE);
-  
-    popMatrix();
-  }
+void drawPlane(float x, float y, float angle, float scaleAmt, int c) {
+
+  pushMatrix();
+  translate(x, y);
+  rotate(angle);
+  scale(scaleAmt);
+
+  noStroke();
+
+  // BODY SHADOW (depth)
+  fill(150,150,150,120);
+  ellipse(-2, 2, 22, 8);
+
+  // MAIN BODY
+  fill(240,240,240);
+  ellipse(0,0,20,6);
+
+  // NOSE
+  fill(255,230,80);
+  triangle(10,0,4,-3,4,3);
+
+  // TOP WING
+  fill(210);
+  quad(-2,-1, 5,-2, -6,-10, -10,-6);
+
+  // BOTTOM WING
+  fill(180);
+  quad(-2,1, 5,2, -6,10, -10,6);
+
+  // TAIL
+  fill(200);
+  triangle(-10,0,-18,-5,-10,-1);
+  triangle(-10,0,-18,5,-10,1);
+
+  // COCKPIT
+  fill(40,80,120);
+  ellipse(6,0,4,3);
+
+  popMatrix();
+}
   
   void drawTopBar() {
   fill(35, 130, 180);
