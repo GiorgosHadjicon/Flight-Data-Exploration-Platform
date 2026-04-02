@@ -66,7 +66,7 @@ ChartDashboard chartDash;
 boolean showChartDash = false;
 
 // For tutorial
-boolean tutorialActive = true;
+boolean tutorialActive = false;
 int tutorialStep = 0; // 0 = highlight flights button, 1 = highlight search bar, 2 = done
 
 void setup() {

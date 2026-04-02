@@ -9,11 +9,17 @@ final int SHOW_MAP = 3;
 final int EVENT_CHANGE_PAGE = 4;
 final int EVENT_RESET_DROP_DOWN = 5;
 final int EVENT_CHART_DASH = 6;
-
-final int EVENT_GO_HOME_SCREEN = 8;
+final int EVENT_GO_HOME_SCREEN = 7;
+boolean firstClick = true;
 
 
 void mousePressed() { 
+  if (firstClick) {
+    showWelcome = false;
+    showFlights = true;
+    tutorialActive = true;
+  }
+  
   if (showChartDash) chartDash.handleMousePressed();
   if (tutorialActive && tutorialStep == 1) {
     // If user clicks near search bar while in tutorial
