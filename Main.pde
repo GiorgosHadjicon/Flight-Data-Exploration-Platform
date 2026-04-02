@@ -9,12 +9,19 @@ import java.util.HashSet;
 import processing.sound.*;
 import processing.data.Table;
 import processing.data.TableRow; 
- //<>//
+
+// Media Assets //<>//
 PImage bg;
+PImage usaMap;
 Gif weather;
 Gif add1;
 Gif add2;
-Movie homeScreenVideo; // Declaring the Movie object
+Movie homeScreenVideo; 
+SoundFile backgroundMusic;
+PFont text;
+PFont myFont;
+
+// Map Variables
 float westLon = -127;
 float eastLon = -58;
 float northLat = 59;
@@ -23,30 +30,31 @@ float mapLeft = 332;
 float mapRight = 1166;
 float mapTop = 145;
 float mapBottom = 608;
-HashMap<String, Airport> airportMap = new HashMap<String, Airport>();
+
 Flight selectedFlight = null;
-Boolean typing = false;
-public boolean searchButtonsCreated = false;
-String currentSearchString = "";
-Searcher search;
-ArrayList<Flight> testFlights;
-public boolean showWelcome = true;
-PFont text;
-PFont myFont;
-WidgetList widgetList;
+MapScreen mapScreen;
+HashMap<String, Airport> airportMap = new HashMap<String, Airport>();
+
+// Boolean for current state
+boolean typing = false;
+boolean showMap = false;
+boolean pageChange = false;
 boolean showFlights = false;
 boolean printedOnce = false;
-boolean showMap = false;
-csvReader cr = new csvReader();
-ArrayList<Flight> flights;
-public ArrayList<Walking> walkers = new ArrayList<Walking>();
-ArrayList<String> temp = new ArrayList<String>();
-public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
-Search_Results result; //<>//
-HomeScreen homeScreen = new HomeScreen();
-PImage usaMap;
-MapScreen mapScreen;
+boolean showChartDash = false;
+public boolean showWelcome = true;
+public boolean searchButtonsCreated = false;
 public boolean isDropDownSearchExpanded = false; 
+
+  // For tutorial
+boolean tutorialActive = false;
+int tutorialStep = 0; // 0 = highlight flights button, 1 = highlight search bar, 2 = done
+
+// Searching
+Searcher search;
+Search_Results result;
+String currentSearchString = "";
+ArrayList<Flight> testFlights;
 public ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
 public ArrayList<String> origins = new ArrayList<String>();
 public ArrayList<String> originsCityName = new ArrayList<String>();
@@ -57,21 +65,36 @@ String originDataBlock = "";
 String originCityName = "";
 String destination = "";
 String destinationCityName = "";
+
+// Widgets
+WidgetList widgetList;
+public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
+
+// CSV Reading
+csvReader cr = new csvReader();
+ArrayList<Flight> flights;
+
+// Walking animation
+public ArrayList<Walking> walkers = new ArrayList<Walking>();
+
+// Home Screen //<>//
+HomeScreen homeScreen = new HomeScreen();
+
+// Page number
 int pageNum = 1;
-boolean pageChange = false;
-SoundFile backgroundMusic;
-//Table table;
 
+// Charts
 ChartDashboard chartDash;
-boolean showChartDash = false;
 
-// For tutorial
-boolean tutorialActive = false;
-int tutorialStep = 0; // 0 = highlight flights button, 1 = highlight search bar, 2 = done
+
+
 
 void setup() {
+  
   frameRate(120);
   pixelDensity(1);
+  
+  // Load Media Assets
   usaMap = loadImage("usa_map.jpg");
   mapScreen = new MapScreen(usaMap);
   loadAirports("merged_airports.csv");
@@ -81,12 +104,6 @@ void setup() {
   textFont(myFont);
   flights = cr.readCSV("flights_full.csv");
   
-  for (int i = 0; i < flights.size(); i++)
-  {
-    Flight currentFlight = flights.get(i);
-    String displayString = currentFlight.getDate(); // Uses data from string
-    temp.add(displayString);
-  }
   
   
 // WALKING ANIMATIONS
@@ -129,7 +146,7 @@ void setup() {
   result = new Search_Results(testFlights);
 
 
-//  //creating ArrayLists for each data block
+  //creating ArrayLists for each data block
   date = search.GetDates();
   origins = search.GetOrigins();
   originsCityName = search.GetOriginCityNames();
@@ -153,8 +170,7 @@ void setup() {
   
 }
 
-  void draw(){
-    //print(isDropDownSearchExpanded); //<>//
+  void draw(){ //<>//
       // Fraw Background and gifs
       image(bg, 0, 0);
       image(weather, 0, 0);
@@ -169,10 +185,8 @@ void setup() {
       
      if (showWelcome) {
        homeScreen.drawWelcomeScreen();
-
      }
-
-        
+  
      if (showFlights) { 
        result.drawDeparture(pageNum);
      }
@@ -180,14 +194,10 @@ void setup() {
      if (showMap) {
        mapScreen.drawMap();
      }
-     
-     
+          
      if (showChartDash) {
       chartDash.draw();
-    }
-    
-
-
+     }
     
      for (Walking w : walkers) {
        w.update();
@@ -195,7 +205,7 @@ void setup() {
      }
      
      if (tutorialActive) {
-     drawTutorialOverlay();
-}
-   }
+       drawTutorialOverlay();
+     }
+ }
    

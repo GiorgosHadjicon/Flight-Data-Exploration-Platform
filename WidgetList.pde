@@ -99,24 +99,19 @@ class WidgetList {
         switch(stateMachine)
         {
           case 1:
-            dateDataBlock = selectedValue;                               //each selected value is assigned to its respective data block in main which in turns feeds into the search function
-            println("Date selected: " + dateDataBlock);                  //which takes in seperate strings for each search components(date, origin etc...)
-            break;
+            dateDataBlock = selectedValue;       //each selected value is assigned to its respective data block in main which in turns feeds into the search function                    
+            break;                               //which takes in seperate strings for each search components(date, origin etc...)
           case 2:
             originDataBlock = selectedValue;
-            println("Origin selected: " + originDataBlock);
             break;
           case 3:
             originCityName = selectedValue;
-            println("Origin city selected: " + originCityName);
             break;
           case 4:
             destination = selectedValue;
-            println("Destination selected: " + destination);
             break;
           case 5:
             destinationCityName = selectedValue;
-            println("Destination city selected: " + destinationCityName);
             break;
           default:
             break; 
