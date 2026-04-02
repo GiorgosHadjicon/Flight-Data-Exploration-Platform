@@ -1,5 +1,3 @@
-
-
 class WidgetList {
   ArrayList<Button> widgets;
   boolean isActive = false;
