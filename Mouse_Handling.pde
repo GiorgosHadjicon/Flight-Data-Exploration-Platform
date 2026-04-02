@@ -19,6 +19,7 @@ void mousePressed() {
     showWelcome = false;
     showFlights = true;
     tutorialActive = true;
+    firstClick = false;
   }
   
   if (showChartDash) chartDash.handleMousePressed();

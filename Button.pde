@@ -97,10 +97,12 @@ class Button implements Widget
       }
       
    
-      
+   // If the button is not pressable or is the reset button or is the change button 
+   // Change the attributes for each button type: strokeColor, strokeWeightValue and the curve of the button
       if (!this.isPressable || this.event == EVENT_RESET_DROP_DOWN || this.event == EVENT_CHANGE_PAGE) {
         strokeColor = color(0);
         strokeWeightValue = 1;
+        
         if ( this.event == EVENT_RESET_DROP_DOWN) {
           strokeColor = color(200, 90, 90);
           curved = 5;
@@ -112,6 +114,7 @@ class Button implements Widget
         }
       }
       
+    // Highlights the selected page
       if (event == EVENT_CHANGE_PAGE && Integer.parseInt(label) == pageNum) {
         currentColor = color(70, 130, 180);
         strokeColor = color(70, 130, 180);
