@@ -123,18 +123,11 @@ void setup() {
   homeScreenVideo.loop(); 
   homeScreenVideo.volume(0); // <--- THIS MUTES THE VIDEO
   
-//  // Search Test
+// Initialise the search results to default values
   search = new Searcher(flights); //<>//
   testFlights = search.Search("1/1/2022", "", -1, "", "", "", -1, "", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
-  for (Flight i : testFlights) {
-    System.out.print(i.flightDateString + " ");
-    System.out.print(i.origin + " ");
-    System.out.print(i.originCityName + " ");
-    System.out.print(i.arrivalTime + " ");
-    System.out.println(i.destination);
-  } 
   result = new Search_Results(testFlights);
-//  // Search test end
+
 
 //  //creating ArrayLists for each data block
   date = search.GetDates();
@@ -153,8 +146,11 @@ void setup() {
   widgetList.add(new Button(10, 205, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
 
 }
+
+//Homescreen video
   void movieEvent(Movie m) {
   m.read();
+  
 }
 
   void draw(){
