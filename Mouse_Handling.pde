@@ -2,6 +2,7 @@
 //==== Mouse Press =====
 //======================
 
+// List of events:
 final int EVENT_NONE = 0;
 final int EVENT_PRINT_SCREEN  = 1;
 final int EVENT_DISPLAY_SINGLE_FLIGHT = 2;
@@ -10,8 +11,8 @@ final int EVENT_CHANGE_PAGE = 4;
 final int EVENT_RESET_DROP_DOWN = 5;
 final int EVENT_CHART_DASH = 6;
 final int EVENT_GO_HOME_SCREEN = 7;
-boolean firstClick = true;
 
+boolean firstClick = true;
 
 void mousePressed() { 
   if (firstClick) {
@@ -173,15 +174,12 @@ void mousePressed() {
     }
   }
 }
+
 void mouseReleased() {
   widgetList.releaseAll();  
   chartDash.handleMouseReleased();
 }
 
-
-
 void mouseDragged() {
   chartDash.handleMouseDragged();
 }
-
-// mouse hover ect...

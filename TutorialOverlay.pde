@@ -58,7 +58,7 @@ void drawTutorialOverlay() {
     );
   }
 
-  // for the text
+  // For the tutorual text on both screens
   fill(255);
   textAlign(CENTER);
   textSize(40);

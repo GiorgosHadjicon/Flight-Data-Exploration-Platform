@@ -8,7 +8,6 @@ class csvReader {
   ArrayList<Flight> readCSV(String filename) {
     
     ArrayList<Flight> flights = new ArrayList<Flight>();
-    
     Table table = loadTable(filename, "header");
     
     if (table == null) 
@@ -16,6 +15,7 @@ class csvReader {
       return flights; // return empty list if file not found
     }
     
+    // for eatch row(flight) in csv assign atributes(columns) to flight
     for (TableRow row : table.rows()) 
     {
       Flight flight = new Flight(
