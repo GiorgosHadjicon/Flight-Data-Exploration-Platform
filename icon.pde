@@ -1,8 +1,7 @@
 class icons extends Button {
   PImage img;
   
-  // Removed redundant drawX, drawY, drawW, drawH variables.
-  // We will just use the x, y, w, h inherited from Button.
+  // use the x, y, w, h inherited from Button.
 
   icons(int x, int y, int w, int h, String label, PImage img, int event) {
     // Pass everything directly to the parent Button constructor
@@ -13,8 +12,7 @@ class icons extends Button {
   void display() {
     pushStyle();
     
-    // CRITICAL FIX: Ensure images are drawn from the top-left corner
-    // so the visual lines up perfectly with the contains() math.
+    // Ensure images are drawn from the top-left corner
     imageMode(CORNER); 
 
     if (img != null) {
