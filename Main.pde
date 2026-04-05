@@ -12,6 +12,9 @@ import processing.data.TableRow;
 
 // Media Assets //<>//
 PImage bg;
+PImage homeImg;
+PImage flightsImg;
+PImage chartsImg;
 PImage usaMap;
 Gif weather;
 Gif add1;
@@ -96,6 +99,9 @@ void setup() {
   
   // Load Media Assets
   usaMap = loadImage("usa_map.jpg");
+  homeImg   = loadImage("homei.png");
+  flightsImg = loadImage("flighti.png");
+  chartsImg  = loadImage("chartsi.png");
   mapScreen = new MapScreen(usaMap);
   loadAirports("merged_airports.csv");
   size(1500, 850);
@@ -156,12 +162,9 @@ void setup() {
   widgetList = new WidgetList();
   
   chartDash = new ChartDashboard();
-  widgetList.add(new Button(10, 305, 120, 35, "CHARTS",
-               color(0,100,200), color(0,160,255), color(0,80,160), EVENT_CHART_DASH));
-  
-  widgetList.add(new Button(10, 155, 140, 45, "HOMESCREEN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_GO_HOME_SCREEN));
-  widgetList.add(new Button(10, 205, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
-
+  widgetList.add(new icons(12, 130, 155, 155, "HOMESCREEN", homeImg, EVENT_GO_HOME_SCREEN));
+  widgetList.add(new icons(10, 300, 150, 150, "FLIGHTS", flightsImg, EVENT_PRINT_SCREEN));
+  widgetList.add(new icons(10, 460, 150, 150, "CHARTS", chartsImg, EVENT_CHART_DASH));
 }
 
 //Homescreen video
