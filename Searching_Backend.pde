@@ -168,6 +168,7 @@ class Searcher {
      return commonFlights;   
    }
    
+   // Return unique string lists (to be used in drop down search)
    ArrayList<String> GetDates(){
      return new ArrayList<String>(flightDateStrings.keySet());
    }

@@ -1,75 +1,109 @@
-////===================== //<>// //<>//
+////===================== //<>//
 ////==== Main Screen ====
 ////=====================
 
-// TODO here: draw guy walking and looking at secondary screen
-
-// draw guy walking and looking at secondary screen
 import gifAnimation.*;
-// Declarations:
+import processing.video.*;
 import java.util.Set;
 import java.util.HashSet;
+import processing.sound.*;
+import processing.data.Table;
+import processing.data.TableRow; 
 
-// For Sreach //<>//
-//background and gifs
+// Media Assets //<>//
 PImage bg;
-Gif tickerScreen;
+PImage usaMap;
+Gif weather;
 Gif add1;
 Gif add2;
-
-Boolean typing = false;
-String currentSearchString = "";
-Searcher search;
-ArrayList<Flight> testFlights;
-public boolean showWelcome = true;
+Movie homeScreenVideo; 
+SoundFile backgroundMusic;
 PFont text;
 PFont myFont;
-WidgetList widgetList;
+
+// Map Variables
+float westLon = -127;
+float eastLon = -58;
+float northLat = 59;
+float southLat = 10;
+float mapLeft = 332;
+float mapRight = 1166;
+float mapTop = 145;
+float mapBottom = 608;
+
+Flight selectedFlight = null;
+MapScreen mapScreen;
+HashMap<String, Airport> airportMap = new HashMap<String, Airport>();
+
+// Boolean for current state
+boolean typing = false;
+boolean showMap = false;
+boolean pageChange = false;
 boolean showFlights = false;
 boolean printedOnce = false;
-boolean showMap = false;
-csvReader cr = new csvReader();
-ArrayList<Flight> flights;
-public ArrayList<Walking> walkers = new ArrayList<Walking>();
-ArrayList<String> temp = new ArrayList<String>();
-public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
-Search_Results result; //<>//
-HomeScreen homeScreen = new HomeScreen();
-PImage usaMap;
-MapScreen mapScreen;
+boolean showChartDash = false;
+public boolean showWelcome = true;
+public boolean searchButtonsCreated = false;
 public boolean isDropDownSearchExpanded = false; 
-ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
-ArrayList<String> origins = new ArrayList<String>();
-ArrayList<String> originsCityName = new ArrayList<String>();
-ArrayList<String> destinations = new ArrayList<String>();
-ArrayList<String> destinationsCityName = new ArrayList<String>();
+
+  // For tutorial
+boolean tutorialActive = false;
+int tutorialStep = 0; // 0 = highlight flights button, 1 = highlight search bar, 2 = done
+
+// Searching
+Searcher search;
+Search_Results result;
+String currentSearchString = "";
+ArrayList<Flight> testFlights;
+public ArrayList<String> date = new ArrayList<String>();      //Array lists of each data block
+public ArrayList<String> origins = new ArrayList<String>();
+public ArrayList<String> originsCityName = new ArrayList<String>();
+public ArrayList<String> destinations = new ArrayList<String>();
+public ArrayList<String> destinationsCityName = new ArrayList<String>();
 String dateDataBlock = "1/1/2022";
 String originDataBlock = "";
 String originCityName = "";
 String destination = "";
 String destinationCityName = "";
+
+// Widgets
+WidgetList widgetList;
+public ArrayList<dropDownSearch> widgetsSearch = new ArrayList<dropDownSearch>();
+
+// CSV Reading
+csvReader cr = new csvReader();
+ArrayList<Flight> flights;
+
+// Walking animation
+public ArrayList<Walking> walkers = new ArrayList<Walking>();
+
+// Home Screen //<>//
+HomeScreen homeScreen = new HomeScreen();
+
+// Page number
 int pageNum = 1;
-boolean pageChange = false;
-//Table table;
+
+// Charts
+ChartDashboard chartDash;
+
+
 
 
 void setup() {
+  
   frameRate(120);
   pixelDensity(1);
+  
+  // Load Media Assets
   usaMap = loadImage("usa_map.jpg");
   mapScreen = new MapScreen(usaMap);
+  loadAirports("merged_airports.csv");
   size(1500, 850);
   text = loadFont("AlTarikh-24.vlw");
-  myFont = createFont("Arial Bold", 20);
+  myFont = createFont("Arial Bold", 12);
   textFont(myFont);
-  flights = cr.readCSV("flights2k.csv");
+  flights = cr.readCSV("flights_full.csv");
   
-  for (int i = 0; i < flights.size(); i++)
-  {
-    Flight currentFlight = flights.get(i);
-    String displayString = currentFlight.getDate(); // Uses data from string
-    temp.add(displayString);
-  }
   
   
 // WALKING ANIMATIONS
@@ -92,27 +126,27 @@ void setup() {
   
   // Background and gifs
   bg = loadImage("background1.png");
-  tickerScreen = new Gif(this, "gifscreen.gif");
-  tickerScreen.loop(); // plays continuously
+  weather = new Gif(this, "weather.gif");
+  weather.loop(); // plays continuously
   add1 = new Gif(this, "addV1.gif");
   add1.loop();
   add2 = new Gif(this, "SatisfatoryGitFinal.gif");
   add2.loop();
   
-//  // Search Test
+  backgroundMusic = new SoundFile(this, "AirportSound.wav");
+  backgroundMusic.loop();
+  
+  homeScreenVideo = new Movie(this, "AirPlaneFly.mov"); 
+  homeScreenVideo.loop(); 
+  homeScreenVideo.volume(0); // <--- THIS MUTES THE VIDEO
+  
+// Initialise the search results to default values
   search = new Searcher(flights); //<>//
-  testFlights = search.Search("1/1/2022", "", -1, "JFK", "New York, NY", "", -1, "LAX", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
-  for (Flight i : testFlights) {
-    System.out.print(i.flightDateString + " ");
-    System.out.print(i.origin + " ");
-    System.out.print(i.originCityName + " ");
-    System.out.print(i.arrivalTime + " ");
-    System.out.println(i.destination);
-  } 
+  testFlights = search.Search("1/1/2022", "", -1, "", "", "", -1, "", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
   result = new Search_Results(testFlights);
-//  // Search test end
 
-//  //creating ArrayLists for each data block
+
+  //creating ArrayLists for each data block
   date = search.GetDates();
   origins = search.GetOrigins();
   originsCityName = search.GetOriginCityNames();
@@ -120,50 +154,58 @@ void setup() {
   destinationsCityName = search.GetDestinationCityNames();
   
   widgetList = new WidgetList();
-  widgetList.add(new Button(360, 45, 120, 45, "PRINT",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN)); 
-  widgetList.add(new Button(490, 45, 120, 45, "PRINTMAP",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), SHOW_MAP));
-  widgetList.addDrop(new dropDownSearch(10, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), date, "date")); 
-  widgetList.addDrop(new dropDownSearch(80, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), origins, "origins")); 
-  widgetList.addDrop(new dropDownSearch(150, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), originsCityName, "originsCityName")); 
-  widgetList.addDrop(new dropDownSearch(220, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinations, "destinations")); 
-  widgetList.addDrop(new dropDownSearch(290, 55, 60, 30, "SEARCH", color(255, 0, 0), color(0, 150, 0), destinationsCityName, "destinationsCityName")); 
+  
+  chartDash = new ChartDashboard();
+  widgetList.add(new Button(10, 305, 120, 35, "CHARTS",
+               color(0,100,200), color(0,160,255), color(0,80,160), EVENT_CHART_DASH));
+  
+  widgetList.add(new Button(10, 155, 140, 45, "HOMESCREEN",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_GO_HOME_SCREEN));
+  widgetList.add(new Button(10, 205, 140, 45, "FLIGHTS",   color(255, 0, 0), color(0, 150, 0), color(150, 0, 0), EVENT_PRINT_SCREEN));
+
 }
 
-  void draw(){
-    if (showWelcome) {
-      homeScreen.drawWelcomeScreen(); //<>//
-     }
-    else {
+//Homescreen video
+  void movieEvent(Movie m) {
+  m.read();
+  
+}
+
+  void draw(){ //<>//
       // Fraw Background and gifs
       image(bg, 0, 0);
-      image(tickerScreen, 640, 10, 780, 110);
+      image(weather, 0, 0);
       image(add1, 1044, 179);
       image(add2, 1075, 515);
       fill(0);
       rect(332, 145, 834, 463);
+      
       pushStyle();
       widgetList.displayWidgets();
       popStyle();
-      if (showFlights) {
-        textFont(text);
-        textSize(10);
-        textAlign(LEFT);
-        
-        result.drawDeparture(pageNum);
+      
+     if (showWelcome) {
+       homeScreen.drawWelcomeScreen();
+     }
+  
+     if (showFlights) { 
+       result.drawDeparture(pageNum);
+     }
 
-      }
-      else if (showMap) {
-        mapScreen.drawMap();
-      }
-      
-      
-      
-      for (Walking w : walkers) {
-        w.update();
-        w.display();
-      }
+     if (showMap) {
+       mapScreen.drawMap();
+     }
+          
+     if (showChartDash) {
+      chartDash.draw();
+     }
+    
+     for (Walking w : walkers) {
+       w.update();
+       w.display();
      }
      
-
-
-}
+     if (tutorialActive) {
+       drawTutorialOverlay();
+     }
+ }
+   

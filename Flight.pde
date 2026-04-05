@@ -19,6 +19,9 @@ class Flight {
   boolean diverted;
   float distance;
   
+  
+  // Description: Creates a flight object that has attributes of all the data provided in the csv file
+  // Parameters: read from the csv file all data points of the flights
   Flight(String flightDate, String mktCarrier, int mktCarrierFlightNum, String origin, String originCityName, String originStateAbbreviation, 
         int originWac, String destination, String destinationCityName, String destinationStateAbbreviation, int destinationWac, 
         int crsDepartureTime, int departureTime, int crsArrivalTime, int arrivalTime, float cancelled, float diverted, float distance) {
@@ -40,6 +43,7 @@ class Flight {
         this.crsArrivalTime = crsArrivalTime;
         this.arrivalTime = arrivalTime;
         
+        // Converts the cancelled and diverted data from floats to boolean
         if (cancelled < 1.0) {
           this.cancelled = false;
         }
@@ -57,36 +61,55 @@ class Flight {
         this.distance = distance;
   }
   
+  // Returns date as a string
   String getDate() {
     String data = "";
     data += flightDate.day + "/" + flightDate.month + "/" + flightDate.year;
     return data;
   }
 
+// Returns Origin City as a string
+// If it is greater than 25 characters truncate it
   String getOriginCityName() {
     String data = "";
     data += originCityName;
+    if(data.length() > 25) {
+      String [] result = data.split("/");
+      for (int i = 1; i < result.length; i++ ){
+        if (i != 1) {
+          data += "/" + result[i];
+        }
+        else {
+          data = result[i];
+        }
+      }
+    }
     return data;
   }
   
+  // Returns origin airport as a string
   String getOriginAirport() {
     String data = "";
     data += origin;
     return data;
   }
   
+  // Returns destination airport as a string
   String getDestinationAirport() {
     String data = "";
     data += destination;
     return data;
   }
   
+  // Returns destination city as a string
   String getDestinationCityName() {
     String data = "";
     data += destinationCityName;
     return data;
   }
   
+  // Returns time as a string
+  // converts the time from the csv file to the format of '0000'
   String getDepartureTime() {
     String data = "";
     if (this.departureTime >= 1000) {
