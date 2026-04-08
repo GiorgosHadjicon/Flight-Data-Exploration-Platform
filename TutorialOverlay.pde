@@ -12,10 +12,10 @@ void drawTutorialOverlay() {
 
   if (tutorialStep == 0) {
     // FLIGHTS BUTTON COORDINATES
-    int x = 10;
-    int y = 205;
-    int w = 140;
-    int h = 45;
+    int x = 12;
+    int y = 300;
+    int w = 145;
+    int h = 150;
 
     // Darken everything except button
     rect(0, 0, width, y);
