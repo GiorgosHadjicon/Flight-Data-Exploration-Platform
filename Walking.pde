@@ -1,3 +1,6 @@
+//=====================
+//=== Walking Class ===
+//=====================
 // AUTHORSHIP: Teressa Domingos, Giorgos Hadjiconstantis 
 
 class Walking {

@@ -10,8 +10,8 @@ import java.util.HashSet;
 import processing.sound.*;
 import processing.data.Table;
 import processing.data.TableRow; 
-
-// Media Assets //<>//
+ //<>//
+// Media Assets
 PImage bg;
 PImage homeImg;
 PImage flightsImg;
@@ -80,7 +80,7 @@ ArrayList<Flight> flights;
 
 // Walking animation
 public ArrayList<Walking> walkers = new ArrayList<Walking>();
-
+ //<>//
 // Home Screen //<>//
 HomeScreen homeScreen = new HomeScreen();
 
@@ -147,8 +147,8 @@ void setup() {
   homeScreenVideo.loop(); 
   homeScreenVideo.volume(0); // <--- THIS MUTES THE VIDEO
   
-// Initialise the search results to default values
-  search = new Searcher(flights); //<>//
+// Initialise the search results to default values //<>//
+  search = new Searcher(flights); //<>// //<>//
   testFlights = search.Search("1/1/2022", "", -1, "", "", "", -1, "", "", "", -1, -1, -1, -1, -1, false, false, -1); //<>//
   result = new Search_Results(testFlights);
 
@@ -173,7 +173,7 @@ void setup() {
   m.read();
   
 }
-
+ //<>//
   void draw(){ //<>//
       // Fraw Background and gifs
       image(bg, 0, 0);

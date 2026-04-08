@@ -1,3 +1,6 @@
+//=============================
+//=== Chart Dashboard Class ===
+//=============================
 // AUTHORSHIP: Odysseas Leonidou
 
 class ChartDashboard {

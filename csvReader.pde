@@ -1,3 +1,6 @@
+//========================
+//=== CSV Reader Class ===
+//========================
 // AUTHORSHIP: Odysseas Leonidou
 
 import java.util.ArrayList;

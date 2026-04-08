@@ -1,4 +1,6 @@
-// FLIGHT CLASS
+//===========================
+//=== Flight Marker Class ===
+//===========================
 // AUTHORSHIP: Zuhairia Sahjabin
 class FlightMarker {
   float x1, y1;   // plane position

@@ -1,3 +1,6 @@
+//====================
+//=== Flight Class ===
+//====================
 // AUTHORSHIP: Giorgos Hadjiconstantis
 
 class Flight {

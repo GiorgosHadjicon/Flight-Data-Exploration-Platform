@@ -1,6 +1,6 @@
-//====================
-// Drawing Map Screen (one off object)
-//====================
+//========================
+//== Drawing Map Screen ==
+//========================
 // AUTHORSHIP: Zuhairia Sahjabin
 
 class MapScreen {

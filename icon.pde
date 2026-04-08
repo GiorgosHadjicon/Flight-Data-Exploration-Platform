@@ -1,3 +1,6 @@
+//==================
+//=== Icon Class ===
+//==================
 // AUTHORSHIP: Teressa Domingos
 
 class icons extends Button {

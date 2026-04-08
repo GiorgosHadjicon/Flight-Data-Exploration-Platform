@@ -1,6 +1,6 @@
-//====================
-// Widget Parent Class (Abstract)
-//====================
+//=========================
+//== Widget Parent Class ==
+//=========================
 // AUTHORSHIP: Odysseas Leonidou
 
 interface Widget 

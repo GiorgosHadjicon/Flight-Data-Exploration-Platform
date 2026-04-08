@@ -1,3 +1,6 @@
+//=========================
+//=== Widget List Class ===
+//=========================
 // AUTHORSHIP: Giorgos Hadjiconstantis, Odysseas Leonidou
 
 class WidgetList {

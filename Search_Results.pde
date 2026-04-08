@@ -1,6 +1,6 @@
-//====================
-// Search Results Screen (one off object)
-//====================
+//===========================
+//== Search Results Screen ==
+//===========================
 // AUTHORSHIP: Giorgos Hadjiconstantis
 
 // draw things when this screen is selected
