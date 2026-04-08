@@ -1,3 +1,5 @@
+// AUTHORSHIP: Teressa Domingos
+
 class icons extends Button {
   PImage img;
   

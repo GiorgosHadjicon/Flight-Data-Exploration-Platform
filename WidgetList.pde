@@ -1,3 +1,5 @@
+// AUTHORSHIP: Giorgos Hadjiconstantis, Odysseas Leonidou
+
 class WidgetList {
   ArrayList<Button> widgets;
   boolean isActive = false;    //boolean to recognise whether a widget is on display or not 

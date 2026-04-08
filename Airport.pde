@@ -1,3 +1,5 @@
+// AUTHORSHIP: Zuhairia Sahjabin
+
 class Airport {
   String code;
   float lat;

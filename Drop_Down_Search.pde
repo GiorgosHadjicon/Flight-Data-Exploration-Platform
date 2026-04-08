@@ -1,6 +1,7 @@
 //==========================
 // Drop Down Search Subclass
 //==========================
+// AUTHORSHIP: Odysseas Leonidou
 class dropDownSearch implements Widget 
 {
   int x, y, w, h;

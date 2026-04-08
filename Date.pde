@@ -1,6 +1,7 @@
 //====================
 //==== Date Class ====
 //====================
+// AUTHORSHIP: Giorgos Zambas
 
 // Created a Date class to be used as a flight atribute
 class Date {

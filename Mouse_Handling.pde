@@ -1,6 +1,7 @@
 //======================
 //==== Mouse Press =====
 //======================
+// AUTHORSHIP: Giorgos Hadjiconstantis
 
 // List of events:
 final int EVENT_NONE = 0;

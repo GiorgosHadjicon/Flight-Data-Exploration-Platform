@@ -1,7 +1,6 @@
+// AUTHORSHIP: Odysseas Leonidou
 
 class ChartDashboard {
-
-
 
   final int TOTAL_DATASETS   = 4;   // how many datasets exist
   final int TOTAL_CHART_TYPES = 3;   // how many chart styles exist (bar, pie, bubble)

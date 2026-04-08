@@ -1,6 +1,8 @@
 //====================
 // Drawing Map Screen (one off object)
 //====================
+// AUTHORSHIP: Zuhairia Sahjabin
+
 class MapScreen {
   PImage usaMap;
   Flight currentFlight = null;

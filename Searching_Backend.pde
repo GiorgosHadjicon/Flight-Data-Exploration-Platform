@@ -1,6 +1,7 @@
 //================================
 // Search backend (one off object)
 //================================
+// AUTHORSHIP: Giorgos Zambas
 
 // construtor takes in array list of all flight data
 // search method having every field have an empty default value and oly search non default values passed in

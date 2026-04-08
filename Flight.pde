@@ -1,3 +1,5 @@
+// AUTHORSHIP: Giorgos Hadjiconstantis
+
 class Flight {
   Date flightDate;
   String flightDateString;

@@ -1,6 +1,8 @@
 //===============================
 //====== Tutorial Function ======
 //===============================
+// AUTHORSHIP: Giorgos Zambas
+
 void drawTutorialOverlay() {
   pushStyle(); // to protect global styles
 

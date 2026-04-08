@@ -1,6 +1,7 @@
 //=======================
 //=== Keyboard Press ====
 //=======================
+// AUTHORSHIP: Giorgos Zambas
 
 void keyPressed() {
   if (widgetsSearch != null) {

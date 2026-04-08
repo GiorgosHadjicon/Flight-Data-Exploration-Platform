@@ -1,4 +1,5 @@
 // FLIGHT CLASS
+// AUTHORSHIP: Zuhairia Sahjabin
 class FlightMarker {
   float x1, y1;   // plane position
   float x2, y2;   // destination

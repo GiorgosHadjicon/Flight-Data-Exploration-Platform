@@ -1,3 +1,5 @@
+// AUTHORSHIP: Teressa Domingos, Giorgos Hadjiconstantis 
+
 class Walking {
   Gif walkIn, action, walkOut; 
   float x, y;                 

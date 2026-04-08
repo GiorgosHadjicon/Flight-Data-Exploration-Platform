@@ -1,6 +1,7 @@
 //=============================
 // Home Screen (one off object)
 //=============================
+// AUTHORSHIP: Teressa Domingos
 
 // Make a simple creative welcome page beforer we select any other page.
 class HomeScreen {

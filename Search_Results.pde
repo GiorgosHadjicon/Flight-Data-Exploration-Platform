@@ -1,6 +1,7 @@
 //====================
 // Search Results Screen (one off object)
 //====================
+// AUTHORSHIP: Giorgos Hadjiconstantis
 
 // draw things when this screen is selected
 // airport like bar with results and ability to select specific flight ( maybe show details button here)

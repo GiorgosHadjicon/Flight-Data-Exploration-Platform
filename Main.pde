@@ -1,6 +1,7 @@
 ////===================== //<>//
 ////==== Main Screen ====
 ////=====================
+// AUTHORSHIP: Everyone
 
 import gifAnimation.*;
 import processing.video.*;
