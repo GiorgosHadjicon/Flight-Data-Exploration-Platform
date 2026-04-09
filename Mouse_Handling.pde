@@ -16,6 +16,7 @@ final int EVENT_GO_HOME_SCREEN = 7;
 boolean firstClick = true;
 
 void mousePressed() { 
+  // Checks for the initial click to start the tutorial
   if (firstClick) {
     showWelcome = false;
     showFlights = true;
@@ -23,7 +24,10 @@ void mousePressed() {
     firstClick = false;
   }
   
+  // Handles the the chart handling
   if (showChartDash) chartDash.handleMousePressed();
+  
+  // Goes to the next step of the tutorial
   if (tutorialActive && tutorialStep == 1) {
     // If user clicks near search bar while in tutorial
     if (mouseY >= 150 && mouseY <= 230) {
@@ -31,6 +35,8 @@ void mousePressed() {
         tutorialActive = false; // tutorial finished
       }
   }
+  
+  // Hnadles the dropdown click and also allows the dropdown to be clicked when it is expanded
   boolean dropdownUsedClick = widgetList.handleSearchEvents();
   if (dropdownUsedClick) return;
   Button clicked = widgetList.getEvent(mouseX, mouseY);
@@ -86,9 +92,7 @@ void mousePressed() {
         }
       }
     }
-      
-  
-        
+           
     //MAP BUTTON
     else if (event == EVENT_DISPLAY_SINGLE_FLIGHT) {
      if (!showMap) {
@@ -146,11 +150,6 @@ void mousePressed() {
           walkers.get(1).handleClick();
         }
     }
-    
-
-
-
-    
     
     //RESET SEARCH BUTTON
     else if (event == EVENT_RESET_DROP_DOWN)

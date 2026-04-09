@@ -1,7 +1,7 @@
 //===========================
 //==== Home Screen Class ====
 //===========================
-// AUTHORSHIP: Teressa Domingos
+// AUTHORSHIP: Teresa Domingos
 
 // Make a simple creative welcome page beforer we select any other page.
 class HomeScreen {

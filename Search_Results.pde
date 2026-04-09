@@ -16,7 +16,7 @@ class Search_Results {
   
 // Constructor takes in array of flights that has been already filtered and stores them
 // Parameters: Take in an arraylist of the flights that have been filtered through the searching algorithm
-// Description: Creates another pointer to the global arraylist 'testFlights' to use in the class
+// Description: Takes in an array list and returns interactive buttons of each flights
   Search_Results(ArrayList<Flight> flightsFiltered) {
     pageChange = true;
     textDisplay = loadFont("AlTarikh-48.vlw");

@@ -33,7 +33,6 @@ void setFlight(Flight f) {
     pushStyle();
     drawBackgroundMap();
     drawFlights();
-    //drawTopBar();
     popStyle();
   }
   
@@ -64,7 +63,6 @@ void setFlight(Flight f) {
 
   float x2 = mapLon(a2.lon);
   float y2 = mapLat(a2.lat);
- 
     
   fill(0,255,120);
   ellipse(x1, y1, 8, 8);
@@ -84,7 +82,7 @@ void setFlight(Flight f) {
   x2 = constrain(x2, mapLeft, mapRight);
   y2 = constrain(y2, mapTop, mapBottom);
 
-  // DRAW CURVE
+  // DRAW BEZIER CURVE 
   stroke(0, 255, 120);
   strokeWeight(3);
   noFill();
@@ -185,25 +183,5 @@ void drawPlane(float x, float y, float angle, float scaleAmt, int c) {
   popMatrix();
 }
   
-  void drawTopBar() {
-  fill(35, 130, 180);
-  noStroke();
-  rect(0, 0, width, 80);
-
-  fill(255);
-  textAlign(CENTER, CENTER);
-
-  textSize(34);
-  text("FLIGHT MAP", width/2, 28);
-
-  textSize(18);
-
-  if (currentFlight != null) {
-    String label = currentFlight.origin + " → " + currentFlight.destination;
-    text(label, width/2, 58);
-  } else {
-    text("No flight selected", width/2, 58);
-  }
-}
 }
   
